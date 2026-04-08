@@ -1,1 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>MOS Generator – Professional Document</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
 
+<!-- Bootstrap -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+
+<style>
+body{background:#f4f6f9;}
+.step{display:none;}
+.step.active{display:block;}
+textarea{font-family:monospace;}
+.card{border-radius:.6rem;}
+.step-header{border-left:4px solid #0d6efd;padding-left:12px;margin-bottom:1rem;}
+
+.page{page-break-after:always;}
+.cover-page{
+  text-align:center;
+  padding-top:120px;
+}
+.cover-page h3{font-weight:700;}
+.cover-meta{margin-top:40px;font-size:14px;}
+
+.mos-section{margin-bottom:28px;}
+.mos-section h5{
+  font-weight:700;
+  border-bottom:2px solid #000;
+  padding-bottom:6px;
+}
+
+.toc ul{list-style:none;padding-left:0;}
+.toc li{margin-bottom:6px;}
+
+.approval-table td{
+  height:60px;
+  vertical-align:bottom;
+}
+</style>
+</head>
+
+<body>
+<div class="container py-4">
+
+<div class="card shadow-sm mb-4 text-center">
+<div class="card-body">
+<h3>Method of Statement (MOS)</h3>
+<p class="text-muted mb-0">Professional MOS Generator</p>
+</div>
+</div>
+
+<!-- ================= STEP 1 ================= -->
+<div id="step1" class="step active">
+<div class="card shadow-sm">
+<div class="card-body">
+<div class="step-header"><h5>Step 1 – MOS Inputs</h5></div>
+
+<div class="row g-3">
+<div class="col-md-6">
+<label class="form-label">MOS Title</label>
+<input id="mosTitle" class="form-control">
+</div>
+
+<div class="col-md-6">
+<label class="form-label">Project / Location</label>
+<input id="project" class="form-control">
+</div>
+
+<div class="col-md-4">
+<label class="form-label">Discipline</label>
+<input id="discipline" class="form-control" value="Civil">
+</div>
+
+<div class="col-md-4">
+<label class="form-label">Trade</label>
+<input id="trade" class="form-control" value="Precast Concrete">
+</div>
+
+<div class="col-md-4">
+<label class="form-label">Type of Work</label>
+<input id="workType" class="form-control">
+</div>
+
+<div class="col-12">
+<label class="form-label">Applicable MOS Components</label>
+<select id="components" class="form-select" multiple>
+<option selected value="10">10 – Purpose</option>
+<option selected value="15">15 – Scope</option>
+<option selected value="20">20 – Definition</option>
+<option selected value="30">30 – References</option>
+<option selected value="40">40 – Responsibilities</option>
+<option selected value="50">50 – Tools</option>
+<option selected value="55">55 – Equipments</option>
+<option selected value="56">56 – Materials</option>
+<option selected value="35">35 – Pre‑Execution Arrangements</option>
+<option selected value="70">70 – Job Hazard Analysis</option>
+<option selected value="60">60 – Procedure</option>
+<option value="25">25 – Abbreviations</option>
+<option value="90">90 – Appendix</option>
+</select>
+</div>
+</div>
+
+<div class="text-end mt-4">
+<button class="btn btn-primary" onclick="generatePrompt()">Generate GPT Prompt</button>
+</div>
+</div>
+</div>
+</div>
+
+<!-- ================= STEP 2 ================= -->
+<div id="step2" class="step">
+<div class="card shadow-sm">
+<div class="card-body">
+<div class="step-header"><h5>Step 2 – GPT Prompt & JSON</h5></div>
+
+<textarea id="promptBox" rows="14" class="form-control mb-3" readonly></textarea>
+
+<button class="btn btn-warning mb-3" onclick="openChatGPT()">
+<i class="bi bi-box-arrow-up-right"></i> Get Response from ChatGPT
+</button>
+
+<textarea id="jsonBox" rows="10" class="form-control" placeholder="Paste MOS_JSON here"></textarea>
+
+<div class="d-flex justify-content-between mt-3">
+<button class="btn btn-outline-secondary" onclick="showStep(1)">Back</button>
+<button class="btn btn-success" onclick="buildMOS()">Generate MOS Document</button>
+</div>
+</div>
+</div>
+</div>
+
+<!-- ================= STEP 3 ================= -->
+<div id="step3" class="step">
+<div class="card shadow-sm">
+<div class="card-body">
+<div class="step-header"><h5>Step 3 – Final Method Statement</h5></div>
+
+<div class="mb-3 d-flex gap-2">
+<button class="btn btn-sm btn-outline-primary" onclick="exportWord()">Word</button>
+<button class="btn btn-sm btn-outline-danger" onclick="exportPDF()">PDF</button>
+</div>
+
+<div id="mosDoc"></div>
+</div>
+</div>
+</div>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js"></script>
+
+<script>
+const MOS_COMPONENTS={
+10:"Purpose",15:"Scope",20:"Definition",25:"Abbreviations",
+30:"References",35:"Pre‑Execution Arrangements",
+40:"Responsibilities",50:"Tools",55:"Equipments",
+56:"Materials",60:"Procedure",70:"Job Hazard Analysis",90:"Appendix"
+};
+
+function showStep(n){
+document.querySelectorAll('.step').forEach(s=>s.classList.remove('active'));
+document.getElementById('step'+n).classList.add('active');
+}
+
+function generatePrompt(){
+const selected=[...components.selectedOptions].map(o=>o.value);
+promptBox.value=`Generate a detailed Method Statement in JSON format.
+
+Title:
+${mosTitle.value}
+
+Project:
+${project.value}
+
+Type of Work:
+${workType.value}
+
+Include ONLY components:
+${selected.join(", ")}
+
+Rules:
+- JSON object name MOS_JSON
+- cmp_type integer only
+- cmp_description HTML only
+- No headings in description
+- Procedure minimum 10 steps
+- Proposal tone
+- Use <p>, <ol>, <ul>, <li>, <br>
+`;
+showStep(2);
+}
+
+function buildMOS(){
+let data;
+try{data=JSON.parse(jsonBox.value);}catch{alert("Invalid JSON");return;}
+
+let toc='';
+let body='';
+
+data.MOS_JSON.forEach((c,i)=>{
+const name=MOS_COMPONENTS[c.cmp_type];
+toc+=`<li>${i+1}. ${name}</li>`;
+body+=`
+<div class="mos-section">
+<h5>${i+1}. ${name}</h5>
+${c.cmp_description}
+</div>`;
+});
+
+mosDoc.innerHTML=`
+<div class="page cover-page">
+<h3>${mosTitle.value}</h3>
+<div class="cover-meta">
+<p><strong>Project:</strong> ${project.value}</p>
+<p><strong>Discipline:</strong> ${discipline.value}</p>
+<p><strong>Trade:</strong> ${trade.value}</p>
+<p><strong>Type of Work:</strong> ${workType.value}</p>
+<p><strong>Date:</strong> ${new Date().toLocaleDateString()}</p>
+</div>
+</div>
+
+<div class="page toc">
+<h4>Table of Contents</h4>
+<ul>${toc}</ul>
+</div>
+
+${body}
+
+<div class="page">
+<h4>Approval & Authorization</h4>
+<table class="table table-bordered approval-table">
+<tr>
+<th>Prepared By (Contractor)</th>
+<th>Reviewed By (Consultant)</th>
+<th>Approved By (Client)</th>
+</tr>
+<tr>
+<td>Name / Signature / Date</td>
+<td>Name / Signature / Date</td>
+<td>Name / Signature / Date</td>
+</tr>
+</table>
+</div>
+`;
+showStep(3);
+}
+
+function openChatGPT(){
+navigator.clipboard.writeText(promptBox.value);
+window.open("https://chat.openai.com","_blank");
+}
+
+function exportWord(){
+const blob=new Blob([mosDoc.innerHTML],{type:"application/msword"});
+const a=document.createElement("a");
+a.href=URL.createObjectURL(blob);
+a.download="Method_Statement.doc";
+a.click();
+}
+
+function exportPDF(){
+const{jsPDF}=window.jspdf;
+const doc=new jsPDF();
+doc.text(mosDoc.innerText,40,40,{maxWidth:520});
+doc.save("Method_Statement.pdf");
+}
+</script>
+
+</body>
+</html>
