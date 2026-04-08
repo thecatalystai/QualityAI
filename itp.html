@@ -135,6 +135,11 @@
       <div class="step-header"><h5>Step 2 – GPT Prompt & JSON</h5></div>
 
       <textarea id="promptBox" rows="12" class="form-control mb-3" readonly></textarea>
+<button class="btn btn-warning" onclick="openChatGPT()">
+  <i class="bi bi-box-arrow-up-right"></i>
+  Get Response from ChatGPT
+</button>
+
       <textarea id="jsonBox" rows="10" class="form-control" placeholder="Paste GPT JSON here"></textarea>
 
       <div class="d-flex justify-content-between mt-3">
@@ -259,6 +264,13 @@ function buildTable(){
     });
   });
   showStep(3);
+}
+
+function openChatGPT() {
+  navigator.clipboard.writeText(promptBox.value).then(() => {
+    window.open("https://chat.openai.com/", "_blank");
+    alert("Prompt copied.\nPaste it into ChatGPT and copy the JSON response back here.");
+  });
 }
 
 // ===== Export Functions =====
