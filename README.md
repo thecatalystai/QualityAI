@@ -1,2 +1,2 @@
 # QualityAI
-Quality AI
+Quality AI is designed to support QA/QC professionals in leveraging artificial intelligence to enhance their daily activities. Its purpose is to streamline routine processes such as inspections, documentation, reporting, and compliance tracking, enabling faster and more accurate decision-making. By integrating AI-driven insights, Quality AI helps professionals reduce manual effort, minimize errors, and improve overall efficiency, allowing them to focus on critical quality assurance and control tasks while maintaining high standards.
