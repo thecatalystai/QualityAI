@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>ITP Generator – 3 Step Workflow</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <!-- ✅ Bootstrap 5 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- ✅ Bootstrap Icons -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+
+  <style>
+    body { background:#f4f6f9; }
+    .step { display:none; }
+    .step.active { display:block; }
+    textarea { font-family: monospace; }
+    .card { border-radius: 0.6rem; }
+    .step-header { border-left:4px solid #0d6efd; padding-left:12px; margin-bottom:1rem; }
+    .table thead th { background:#0d6efd; color:#fff; vertical-align:middle; }
+    select[multiple] { height: 230px; }
+    .small-help { font-size: 0.85rem; }
+    .badge-soft {
+      background: rgba(13,110,253,.12);
+      color: #0d6efd;
+      border: 1px solid rgba(13,110,253,.20);
+    }
+  </style>
+</head>
+
+<body>
+<div class="container py-4">
+
+  <div class="card shadow-sm mb-4">
+    <div class="card-body text-center">
+      <h3 class="mb-1">Inspection & Testing Plan (ITP)</h3>
+      <p class="text-muted mb-0">AI‑Assisted ITP Creation Workflow</p>
+    </div>
+  </div>
+
+  <!-- STEP 1 -->
+  <div id="step1" class="step active">
+    <div class="card shadow-sm">
+      <div class="card-body">
+        <div class="step-header d-flex align-items-center justify-content-between">
+          <h5 class="mb-0">Step 1 – ITP Input Information</h5>
+          <span class="badge badge-soft rounded-pill px-3 py-2">
+            <i class="bi bi-1-circle me-1"></i> Inputs
+          </span>
+        </div>
+
+        <div class="row g-3">
+
+          <div class="col-md-4">
+            <label class="form-label">ITP Reference No</label>
+            <input id="itpRef" class="form-control" placeholder="e.g., ITP-CIV-001" />
+          </div>
+
+          <div class="col-md-4">
+            <label class="form-label">Discipline</label>
+            <input list="disciplineList" id="discipline" class="form-control" placeholder="Select or type..." />
+            <datalist id="disciplineList">
+              <option value="Civil"></option>
+              <option value="Electrical"></option>
+              <option value="Mechanical"></option>
+            </datalist>
+          </div>
+
+          <div class="col-md-4">
+            <label class="form-label">Trade</label>
+            <input list="tradeList" id="trade" class="form-control" placeholder="Select or type..." />
+            <datalist id="tradeList">
+              <option value="Concrete Pouring"></option>
+              <option value="HVAC"></option>
+            </datalist>
+          </div>
+
+          <div class="col-md-6">
+            <label class="form-label">Type of Work</label>
+            <input id="work" class="form-control" placeholder="e.g., Concrete pouring for slabs/footings" />
+          </div>
+
+          <div class="col-md-6">
+            <label class="form-label">Applicable Standards</label>
+            <input id="standards" class="form-control" placeholder="e.g., ISO 9001, ASTM, ACI, Project Specs" />
+            <div class="text-muted small-help mt-1">Tip: separate with commas</div>
+          </div>
+
+          <div class="col-12">
+            <label class="form-label">Project Notes</label>
+            <textarea id="notes" rows="3" class="form-control" placeholder="Any project/client notes..."></textarea>
+          </div>
+
+          <div class="col-md-6">
+            <label class="form-label">Applicable Stages (Multi‑Select)</label>
+            <select id="stages" class="form-select" multiple>
+              <!-- Default selected (basic) -->
+              <option selected value="10|Document Review">10 – Document Review</option>
+              <option selected value="45|Construction">45 – Construction</option>
+              <option selected value="50|Testing">50 – Testing</option>
+
+              <option value="70|Commissioning">70 – Commissioning</option>
+              <option value="20|Factory Inspection">20 – Factory Inspection</option>
+              <option value="40|Installation">40 – Installation</option>
+              <option value="30|Material Receiving">30 – Material Receiving</option>
+              <option value="60|Pre‑Commissioning">60 – Pre‑Commissioning</option>
+              <option value="11|Preparation">11 – Preparation</option>
+              <option value="55|Reporting">55 – Reporting</option>
+              <option value="15|Survey">15 – Survey</option>
+              <option value="80|Testing & Commissioning">80 – Testing & Commissioning</option>
+            </select>
+            <div class="text-muted small-help mt-1">Hold Ctrl (Windows) / Cmd (Mac) to select multiple</div>
+          </div>
+
+          <div class="col-md-3">
+            <label class="form-label">Agency Roles (Multi‑Select)</label>
+            <select id="agency" class="form-select" multiple>
+              <!-- Default selected -->
+              <option selected value="1|Client">1 – Client</option>
+              <option value="20|Consultant">20 – Consultant</option>
+              <option selected value="50|Contractor">50 – Contractor</option>
+              <option value="2|Developer">2 – Developer</option>
+              <option value="510|Health & Safety">510 – Health & Safety</option>
+              <option value="200|Operator">200 – Operator</option>
+              <option value="0|Owner">0 – Owner</option>
+              <option value="530|Planning">530 – Planning</option>
+              <option value="11|PMO">11 – PMO</option>
+              <option value="520|Quality Assurance & Control">520 – QA/QC</option>
+              <option value="100|Sub Con">100 – Sub Con</option>
+              <option value="500|Support Service">500 – Support Service</option>
+              <option value="400|Third Party Testing Service">400 – Third Party Testing Service</option>
+              <option value="300|Vendor">300 – Vendor</option>
+            </select>
+            <div class="text-muted small-help mt-1">Choose who participates in inspection/review</div>
+          </div>
+
+          <div class="col-md-3">
+            <label class="form-label">Role Types (Multi‑Select)</label>
+            <select id="roleType" class="form-select" multiple>
+              <!-- Default selected -->
+              <option selected value="50|I|Inspection">50 – I – Inspection</option>
+              <option selected value="60|W|Witness">60 – W – Witness</option>
+
+              <option value="80|H|Hold Point">80 – H – Hold Point</option>
+              <option value="81|H1|100% Hold Point">81 – H1 – 100% Hold Point</option>
+              <option value="82|H2|Sample Hold Point">82 – H2 – Sample Hold Point</option>
+              <option value="20|R|Review">20 – R – Review</option>
+              <option value="21|R1|100% Review of Documents">21 – R1 – 100% Review</option>
+              <option value="22|R2|Sample Review of Documents">22 – R2 – Sample Review</option>
+              <option value="90|RH|Review and Approval of Documents">90 – RH – Review & Approval</option>
+              <option value="91|RH1|100% Review and Approval">91 – RH1 – 100% Review & Approval</option>
+              <option value="92|RH2|Sample Review and Approval">92 – RH2 – Sample Review & Approval</option>
+              <option value="40|S|Surveillance">40 – S – Surveillance</option>
+              <option value="61|W1|100% Witness">61 – W1 – 100% Witness</option>
+              <option value="62|W2|Sample Witness">62 – W2 – Sample Witness</option>
+            </select>
+            <div class="text-muted small-help mt-1">Only these roles should be used in GPT output</div>
+          </div>
+
+        </div>
+
+        <div class="d-flex justify-content-end mt-4">
+          <button class="btn btn-primary" onclick="generatePrompt()">
+            <i class="bi bi-arrow-right-circle"></i> Generate GPT Prompt
+          </button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- STEP 2 -->
+  <div id="step2" class="step">
+    <div class="card shadow-sm">
+      <div class="card-body">
+        <div class="step-header d-flex align-items-center justify-content-between">
+          <h5 class="mb-0">Step 2 – Copy Prompt → Paste JSON</h5>
+          <span class="badge badge-soft rounded-pill px-3 py-2">
+            <i class="bi bi-2-circle me-1"></i> Prompt
+          </span>
+        </div>
+
+        <div class="alert alert-info small mb-3">
+          <strong>Instructions:</strong> Copy the prompt below → paste in ChatGPT → copy the JSON response → paste into the JSON box.
+        </div>
+
+        <label class="form-label">Prompt</label>
+        <textarea id="promptBox" rows="14" class="form-control" readonly></textarea>
+
+        <label class="form-label mt-3">ChatGPT JSON Response</label>
+        <textarea id="jsonBox" rows="10" class="form-control" placeholder="Paste JSON here..."></textarea>
+
+        <div class="d-flex justify-content-between align-items-center mt-3">
+          <button class="btn btn-outline-secondary" onclick="showStep(1)">
+            <i class="bi bi-arrow-left"></i> Back
+          </button>
+          <button class="btn btn-success" onclick="buildTable()">
+            <i class="bi bi-table"></i> Generate ITP Table
+          </button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- STEP 3 -->
+  <div id="step3" class="step">
+    <div class="card shadow-sm">
+      <div class="card-body">
+        <div class="step-header d-flex align-items-center justify-content-between">
+          <h5 class="mb-0">Step 3 – Generated ITP Table</h5>
+          <span class="badge badge-soft rounded-pill px-3 py-2">
+            <i class="bi bi-3-circle me-1"></i> Output
+          </span>
+        </div>
+
+        <div class="row g-2 mb-3">
+          <div class="col-md-3"><div class="p-2 bg-light rounded"><strong>ITP Ref:</strong> <span id="outRef"></span></div></div>
+          <div class="col-md-3"><div class="p-2 bg-light rounded"><strong>Discipline:</strong> <span id="outDiscipline"></span></div></div>
+          <div class="col-md-3"><div class="p-2 bg-light rounded"><strong>Trade:</strong> <span id="outTrade"></span></div></div>
+          <div class="col-md-3"><div class="p-2 bg-light rounded"><strong>Work:</strong> <span id="outWork"></span></div></div>
+        </div>
+
+        <div class="table-responsive">
+          <table class="table table-bordered table-sm align-middle" id="itpTable">
+            <thead>
+              <tr class="text-center">
+                <th style="min-width:180px;">Stage</th>
+                <th style="min-width:360px;">Activity</th>
+                <th style="min-width:160px;">Quantum of Check</th>
+                <th style="min-width:220px;">Reference Standard</th>
+                <th style="min-width:160px;">Inspection Role</th>
+                <th style="min-width:220px;">Agency Role</th>
+                <th style="min-width:220px;">Remarks</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+
+        <div class="d-flex justify-content-between mt-3">
+          <button class="btn btn-outline-secondary" onclick="showStep(2)">
+            <i class="bi bi-arrow-left"></i> Back
+          </button>
+          <button class="btn btn-outline-primary" onclick="window.scrollTo({top:0, behavior:'smooth'})">
+            <i class="bi bi-arrow-up"></i> Top
+          </button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- Bootstrap JS (optional but fine to include) -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
+/* -----------------------------
+   Helpers
+----------------------------- */
+function showStep(n){
+  document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
+  document.getElementById('step' + n).classList.add('active');
+}
+
+function selectedOptionsText(selectId){
+  return [...document.getElementById(selectId).selectedOptions].map(o => o.text.trim());
+}
+
+function selectedOptionsValues(selectId){
+  return [...document.getElementById(selectId).selectedOptions].map(o => o.value);
+}
+
+/* Collect selected stage numbers into a Set (for filtering output) */
+function selectedStageNumbersSet(){
+  const vals = selectedOptionsValues('stages'); // "10|Document Review"
+  const stageNos = vals.map(v => String(v).split('|')[0].trim());
+  return new Set(stageNos);
+}
+
+/* -----------------------------
+   Step 1 -> Step 2 (Prompt)
+----------------------------- */
+function generatePrompt(){
+  const stageTexts = selectedOptionsText('stages');
+  const agencyTexts = selectedOptionsText('agency');
+  const roleTexts   = selectedOptionsText('roleType');
+
+  const stageAllowed = stageTexts.map(s => `- ${s}`).join('\n');
+  const agencyAllowed = agencyTexts.map(s => `- ${s}`).join('\n');
+  const roleAllowed = roleTexts.map(s => `- ${s}`).join('\n');
+
+  const prompt =
+`You are a QA/QC Engineer. Generate an Inspection & Testing Plan (ITP) in STRICT JSON only (no markdown, no explanations).
+
+Inputs:
+- ITP_Reference_No: ${itpRef.value}
+- Discipline: ${discipline.value}
+- Trade: ${trade.value}
+- Type_of_Work: ${work.value}
+- Applicable_Standards: ${standards.value}
+- Project_Notes: ${notes.value}
+
+Allowed Stages (generate ONLY these stages):
+${stageAllowed}
+
+Allowed Agency Roles (use ONLY these where applicable):
+${agencyAllowed}
+
+Allowed Role Types (use ONLY these codes/roles):
+${roleAllowed}
+
+JSON Output Schema (MUST follow):
+{
+  "ITP_Reference_No": "",
+  "Discipline": "",
+  "Trade": "",
+  "Type_of_Work": "",
+  "Applicable_Standards": ["..."],
+  "Applicable_Stages": [
+    {
+      "Stage_No": 10,
+      "Stage_Name": "Document Review",
+      "Activities": [
+        {
+          "Activity": "",
+          "Inspection_Role": "R/W/I/H/S/RH/H1/H2/R1/R2/W1/W2",
+          "Agency_Role": "Client/Consultant/Contractor/... (from allowed list)"
+        }
+      ]
+    }
+  ],
+  "Project_Notes": ""
+}
+
+Rules:
+1) Include activities ONLY under the selected stages.
+2) Each stage must contain an Activities array (can be empty if truly not applicable).
+3) Use only the selected Inspection Role Types.
+4) Use only the selected Agency Roles.
+5) Keep language professional and construction QA/QC oriented.`;
+
+  promptBox.value = prompt;
+  showStep(2);
+}
+
+/* -----------------------------
+   Step 2 -> Step 3 (Build Table)
+   Supports BOTH schemas:
+   A) data.Applicable_Stages[].Activities[]
+   B) data.activities[] (legacy flat array)
+----------------------------- */
+function buildTable(){
+  const raw = (jsonBox.value || '').trim();
+  if(!raw){
+    alert('JSON is empty. Please paste ChatGPT JSON response.');
+    return;
+  }
+
+  let data;
+  try {
+    data = JSON.parse(raw);
+  } catch (e) {
+    console.error(e);
+    alert('Invalid JSON. Please ensure it is valid JSON (no trailing commas).');
+    return;
+  }
+
+  // Output header labels in step 3
+  document.getElementById('outRef').textContent = data.ITP_Reference_No || itpRef.value || '';
+  document.getElementById('outDiscipline').textContent = data.Discipline || discipline.value || '';
+  document.getElementById('outTrade').textContent = data.Trade || trade.value || '';
+  document.getElementById('outWork').textContent = data.Type_of_Work || work.value || '';
+
+  const tbody = document.querySelector('#itpTable tbody');
+  tbody.innerHTML = '';
+
+  const allowedStages = selectedStageNumbersSet();
+
+  // --------- Schema A (preferred): Applicable_Stages ---------
+  if (Array.isArray(data.Applicable_Stages)) {
+
+    const standardsText = Array.isArray(data.Applicable_Standards)
+      ? data.Applicable_Standards.join(', ')
+      : (data.Applicable_Standards || standards.value || '');
+
+    data.Applicable_Stages.forEach(stage => {
+      const stageNo = String(stage.Stage_No ?? '').trim();
+      if(stageNo && !allowedStages.has(stageNo)) return; // Filter to selected stages only
+
+      if (!Array.isArray(stage.Activities)) return;
+
+      stage.Activities.forEach(act => {
+        const row = tbody.insertRow();
+        row.innerHTML = `
+          <td>${stageNo ? stageNo + ' – ' : ''}${stage.Stage_Name || ''}</td>
+          <td contenteditable="true">${act.Activity || ''}</td>
+          <td contenteditable="true">As Applicable</td>
+          <td contenteditable="true">${standardsText}</td>
+          <td class="text-center"><span class="badge text-bg-secondary">${act.Inspection_Role || ''}</span></td>
+          <td contenteditable="true">${act.Agency_Role || ''}</td>
+          <td contenteditable="true"></td>
+        `;
+      });
+    });
+
+    showStep(3);
+    return;
+  }
+
+  // --------- Schema B (legacy): activities[] flat ---------
+  if (Array.isArray(data.activities)) {
+    data.activities.forEach(a => {
+      // If stage_code exists, filter by allowed stages
+      const stageNo = String(a.stage_code ?? '').trim();
+      if(stageNo && !allowedStages.has(stageNo)) return;
+
+      const row = tbody.insertRow();
+      row.innerHTML = `
+        <td>${(a.stage_code ? a.stage_code + ' – ' : '')}${a.stage_name || ''}</td>
+        <td contenteditable="true">${a.activity || ''}</td>
+        <td contenteditable="true">${a.quantum_of_check || ''}</td>
+        <td contenteditable="true">${a.reference_standard || ''}</td>
+        <td class="text-center"><span class="badge text-bg-secondary">${(a.role || a.inspection_role || '')}</span></td>
+        <td contenteditable="true">${(a.agency_role || '')}</td>
+        <td contenteditable="true">${a.remarks || ''}</td>
+      `;
+    });
+
+    showStep(3);
+    return;
+  }
+
+
+  // --------- No recognized schema ---------
+  console.error('Unrecognized JSON schema:', data);
+  alert("JSON schema not recognized. Expected 'Applicable_Stages' or 'activities'.");
+}
+</script>
+
+</body>
