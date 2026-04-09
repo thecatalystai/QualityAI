@@ -43,6 +43,7 @@
 </head>
 
 <body>
+
 <div class="container py-4">
 
   <div class="card shadow-sm mb-4 text-center">
@@ -59,12 +60,12 @@
       <div class="step-header"><h5>Step 1 – ITP Inputs</h5></div>
 
       <div class="row g-3">
-        <div class="col-md-4">
-          <label class="form-label">ITP Reference No</label>
-          <input id="itpRef" class="form-control">
+        <div class="col-md-12">
+          <label class="form-label">Title of ITP</label>
+          <input id="work" class="form-control" placeholder="Construcion of Reinforced Concrete Foundation">
         </div>
 
-        <div class="col-md-4">
+        <div class="col-md-6">
           <label class="form-label">Discipline</label>
           <input list="disciplineList" id="discipline" class="form-control">
           <datalist id="disciplineList">
@@ -74,7 +75,7 @@
           </datalist>
         </div>
 
-        <div class="col-md-4">
+        <div class="col-md-6">
           <label class="form-label">Trade</label>
           <input list="tradeList" id="trade" class="form-control">
           <datalist id="tradeList">
@@ -83,12 +84,7 @@
           </datalist>
         </div>
 
-        <div class="col-md-6">
-          <label class="form-label">Type of Work</label>
-          <input id="work" class="form-control">
-        </div>
-
-        <div class="col-md-6">
+        <div class="col-md-12">
           <label class="form-label">Applicable Standards</label>
           <input id="standards" class="form-control" placeholder="ISO, ASTM, Project Specs">
         </div>
@@ -103,7 +99,7 @@
           <select id="stages" class="form-select" multiple>
             <option selected>Document Review</option>
             <option>Preparation</option>
-            <option>Survey</option>
+            <option selected>Survey</option>
             <option>Factory Inspection</option>
             <option>Material Receiving</option>
             <option>Installation</option>
@@ -112,7 +108,7 @@
             <option>Reporting</option>
             <option>Pre‑Commissioning</option>
             <option>Commissioning</option>
-            <option>Testing & Commissioning</option>
+            <option selected>Testing & Commissioning</option>
           </select>
         </div>
 
@@ -120,10 +116,10 @@
           <label class="form-label">Agency Roles</label>
           <select id="agencies" class="form-select" multiple>
             <option selected>Client</option>
-            <option>Consultant</option>
+            <option selected>Consultant</option>
             <option selected>Contractor</option>
             <option>Vendor</option>
-            <option>Third Party</option>
+            <option selected>Third Party</option>
           </select>
         </div>
 
@@ -132,15 +128,15 @@
           <select id="roles" class="form-select" multiple>
             <option selected>I</option>
             <option selected>W</option>
-            <option>H</option>
-            <option>R</option>
-            <option>S</option>
+            <option selected>H</option>
+            <option selected>R</option>
+            <option selected>S</option>
           </select>
         </div>
       </div>
 
       <div class="text-end mt-4">
-        <button class="btn btn-primary" onclick="generatePrompt()">Generate GPT Prompt</button>
+        <button class="btn btn-primary" onclick="generatePrompt()">Next</button>
       </div>
     </div>
   </div>
@@ -153,17 +149,18 @@
       <div class="step-header"><h5>Step 2 – GPT Prompt & JSON</h5></div>
 
       <textarea id="promptBox" rows="12" class="form-control mb-3" readonly></textarea>
-<button class="btn btn-warning" onclick="openChatGPT()">
+	Copy the above prompt in GPT and submit response in below textbox
+
+<button class="btn btn-warning btn-sm" onclick="openChatGPT()">
   <i class="bi bi-box-arrow-up-right"></i>
   Get Response from ChatGPT
 </button>
-<br>
-      <br>
+
       <textarea id="jsonBox" rows="10" class="form-control" placeholder="Paste GPT JSON here"></textarea>
 
       <div class="d-flex justify-content-between mt-3">
         <button class="btn btn-outline-secondary" onclick="showStep(1)">Back</button>
-        <button class="btn btn-success" onclick="buildTable()">Generate ITP Table</button>
+        <button class="btn btn-success" onclick="buildTable()">Generate ITP</button>
       </div>
     </div>
   </div>
@@ -226,7 +223,29 @@ function generatePrompt(){
   const agencies=[...agenciesEl.selectedOptions].map(o=>o.text);
   const roles=[...rolesEl.selectedOptions].map(o=>o.text);
 
-  promptBox.value = `Generate an Inspection & Testing Plan (ITP) in JSON ONLY.
+  promptBox.value = `Generate a detailed Inspection & Testing Plan (ITP) in JSON ONLY for ${work.value} in context of ${discipline.value} discipline and ${discipline.value} trade.
+
+Applicable Standards:
+${standards.value}
+Include other relevant international standards if applicable
+
+Notes:
+
+- Activities must follow actual construction workflow and sequencing.
+- Each activity must be specific, measurable, and inspection-oriented.
+- Avoid generic wording (e.g., "check work"); use precise engineering terminology.
+- Ensure alignment with QA/QC practices used in civil projects.
+- Include both inspection and testing activities where applicable.
+- Assign appropriate inspection level based on criticality:
+  - I = Inspection (routine)
+  - W = Witness
+  - H = Hold Point (mandatory approval before proceeding)
+  - R = Review
+  - S = Surveillance (random/periodic)
+- Distribute responsibilities logically across agencies.
+
+Special Considerations: 
+${notes.value}
 
 Stages:
 ${stages.map(s=>'- '+s).join('\n')}
@@ -236,6 +255,12 @@ ${agencies.join(', ')}
 
 Roles:
 ${roles.join(', ')}
+
+Output Requirements:
+- JSON ONLY (no explanation, no comments, no extra text)
+- Maintain strict JSON validity
+- Populate all stages even if minimal activities apply
+- Each stage must contain multiple relevant activities
 
 JSON structure:
 {
