@@ -155,6 +155,9 @@
   <i class="bi bi-box-arrow-up-right"></i>
   Get Response from ChatGPT
 </button>
+<br>
+<br>
+<button onclick="callGroq()">Send Request</button>
 
       <textarea id="jsonBox" rows="10" class="form-control" placeholder="Paste GPT JSON here"></textarea>
 
@@ -329,3 +332,66 @@ const rolesEl=document.getElementById('roles');
 </script>
 </body>
 </html>
+<script>
+async function callGroq() {
+  const promptEl = document.getElementById("promptBox");
+  const outputEl = document.getElementById("jsonBox");
+
+  const prompt = promptEl.value.trim();
+
+  // ✅ Validate input
+  if (!prompt) {
+    outputEl.textContent = "Please enter a prompt.";
+    return;
+  }
+
+  outputEl.textContent = "Loading...";
+
+  try {
+    const response = await fetch(
+      "https://api.groq.com/openai/v1/chat/completions",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": "Bearer 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"
+        },
+        body: JSON.stringify({
+          model: "openai/gpt-oss-120b",
+          messages: [
+            { role: "user", content: prompt }
+          ],
+          temperature: 0.7
+        })
+      }
+    );
+
+    // ✅ Parse response safely
+    const data = await response.json();
+
+    // ✅ Handle API errors explicitly
+    if (!response.ok) {
+      console.error("Groq API Error:", data);
+      outputEl.textContent =
+        data?.error?.message || "Request failed with status " + response.status;
+      return;
+    }
+
+    // ✅ Validate response structure
+    if (
+      data.choices &&
+      data.choices.length > 0 &&
+      data.choices[0].message
+    ) {
+      outputEl.textContent = data.choices[0].message.content;
+    } else {
+      console.warn("Unexpected response:", data);
+      outputEl.textContent = "Unexpected response format.";
+    }
+
+  } catch (error) {
+    console.error("Fetch Error:", error);
+    outputEl.textContent = "Error: " + error.message;
+  }
+}
+</script>
