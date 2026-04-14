@@ -149,20 +149,16 @@
       <div class="step-header"><h5>Step 2 – GPT Prompt & JSON</h5></div>
 
       <textarea id="promptBox" rows="12" class="form-control mb-3" readonly></textarea>
-	Copy the above prompt in GPT and submit response in below textbox
-
-<div class="d-flex justify-content-between align-items-center">
-  
-  <button class="btn btn-warning btn-sm" onclick="openChatGPT()">
-    <i class="bi bi-box-arrow-up-right"></i>
-    Get Response from ChatGPT
-  </button>
-
-  <button onclick="callGroq()" class="btn btn-warning btn-sm">
-    Send Request
-  </button>
-
-</div>
+		<div class="d-flex justify-content-between align-items-center">
+		  <button onclick="callGroq()" class="btn btn-success btn-lg">
+		    Send Request
+		  </button>		
+			
+			<button class="btn btn-warning btn-sm" onclick="openChatGPT()">
+			<i class="bi bi-box-arrow-up-right"></i>
+			Get Response from ChatGPT
+		  </button>
+		</div>
 
       <textarea id="jsonBox" rows="10" class="form-control" placeholder="Paste GPT JSON here"></textarea>
 
@@ -389,6 +385,7 @@ async function callGroq() {
       data.choices[0].message
     ) {
       outputEl.textContent = data.choices[0].message.content;
+	  buildTable();
     } else {
       console.warn("Unexpected response:", data);
       outputEl.textContent = "Unexpected response format.";
