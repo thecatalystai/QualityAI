@@ -27,7 +27,9 @@
 
             <div class="col-md-9">
                 <label class="form-label">Select Prompt Type</label>
-                <select id="promptSelector" class="form-select" onchange="loadSchema()"></select>
+                <select id="promptSelector" class="form-select" onchange="loadSchema()">
+                    <option value="" selected disabled>Select prompt type...</option>
+                </select>
             </div>
 
             <div class="col-md-3">
