@@ -12,7 +12,7 @@
             "name": "discipline",
             "label": "Discipline",
             "type": "dropdown",
-            "options": ["Civil", "Mechanical", "Electrical"]
+            "options": ["Civil Engineering", "Mechanical Engineering", "Electrical Engineering"]
         },
         {
             "name": "activity",
@@ -22,7 +22,7 @@
         {
             "name": "inspection_stage",
             "label": "Stages",
-            "type": "multiselect",
+            "type": "dropdown",
             "options": ["Document Review", "Factory Inspection", "Material Receiving", "Survey", "Preparation", "Construction", "Installation", "Testing", "Commissioning"]
         },
         {
