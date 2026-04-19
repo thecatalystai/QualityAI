@@ -30,7 +30,13 @@
             "label": "Stakeholder",
             "type": "multiselect",
             "options": ["Client", "Contractor", "Consultant", "QA/QC - Quality Control", "Third Party Testing Service", "HSE - Health & Safety", "Vendor", "PMO", "Operator", "Developer", "Owner", "Sub Contractor", "Developer"]
-        },        
+        }, 
+        {
+            "name": "role",
+            "label": "Roles & Responsibilities",
+            "type": "multiselect",
+            "options": ["H - Hold Point", "I - Inspection", "R - Review", "S - Surveillance", "W - Witness"]
+        },          
         {
             "name": "remarks",
             "label": "Remarks",
