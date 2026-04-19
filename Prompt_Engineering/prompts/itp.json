@@ -15,15 +15,15 @@
             "options": ["Civil", "Mechanical", "Electrical"]
         },
         {
+            "name": "activity",
+            "label": "Construction Activity",
+            "type": "text"
+        },        
+        {
             "name": "stages",
             "label": "Stages",
             "type": "multiselect",
-            "options": [
-                { "value": "45", "label": "Construction" },
-                { "value": "50", "label": "Testing" },
-                { "value": "10", "label": "Document Review" },
-                { "value": "70", "label": "Commissioning" }
-            ]
+            "options": ["Document Review", "Factory Inspection", "Material Receiving", "Survey", "Preparation", "Construction", "Installation", "Testing", "Commissioning"]
         },
         {
             "name": "remarks",
