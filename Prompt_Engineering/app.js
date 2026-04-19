@@ -40,6 +40,13 @@ window.generatePrompt = function () {
 
     storage.save(prompt);
     renderHistory();
+
+    // Copy to clipboard
+    navigator.clipboard.writeText(prompt).then(() => {
+        alert("✅ Prompt copied successfully! You can now paste it into any generative AI tool to generate content.");
+    }).catch(() => {
+        alert("⚠️ Failed to copy prompt. Please manually copy it from the output area.");
+    });
 };
 
 /* HISTORY */
