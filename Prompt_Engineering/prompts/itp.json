@@ -1,0 +1,36 @@
+{
+    "id": "itp",
+    "version": "1.0",
+
+    "fields": [
+        {
+            "name": "work_title",
+            "label": "Work Title",
+            "type": "text"
+        },
+        {
+            "name": "discipline",
+            "label": "Discipline",
+            "type": "dropdown",
+            "options": ["Civil", "Mechanical", "Electrical"]
+        },
+        {
+            "name": "stages",
+            "label": "Stages",
+            "type": "multiselect",
+            "options": [
+                { "value": "45", "label": "Construction" },
+                { "value": "50", "label": "Testing" },
+                { "value": "10", "label": "Document Review" },
+                { "value": "70", "label": "Commissioning" }
+            ]
+        },
+        {
+            "name": "remarks",
+            "label": "Remarks",
+            "type": "textarea"
+        }
+    ],
+
+    "template": "Prepare Inspection and Testing Plan for {{work_title}} in {{discipline}} discipline.\n\nStages: {{stages}}.\n\nOutput strictly in JSON under ITP_JSON."
+}
