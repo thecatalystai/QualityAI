@@ -29,7 +29,7 @@
             "name": "stakeholder",
             "label": "Stakeholder",
             "type": "multiselect",
-            "options": ["Client", "Contractor", "Consultant", "QA/QC - Quality Control", "Third Party Testing Service", "HSE - Health & Safety", "Vendor", "PMO", "Operator", "Developer", Owner", "Sub Contractor", "Developer"]
+            "options": ["Client", "Contractor", "Consultant", "QA/QC - Quality Control", "Third Party Testing Service", "HSE - Health & Safety", "Vendor", "PMO", "Operator", "Developer", "Owner", "Sub Contractor", "Developer"]
         },        
         {
             "name": "remarks",
