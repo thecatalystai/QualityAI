@@ -20,7 +20,7 @@
             "type": "text"
         },        
         {
-            "name": "inspection_stages",
+            "name": "inspection_stage",
             "label": "Stages",
             "type": "multiselect",
             "options": ["Document Review", "Factory Inspection", "Material Receiving", "Survey", "Preparation", "Construction", "Installation", "Testing", "Commissioning"]
