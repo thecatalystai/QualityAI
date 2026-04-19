@@ -36,7 +36,12 @@
             "label": "Roles & Responsibilities",
             "type": "multiselect",
             "options": ["H - Hold Point", "I - Inspection", "R - Review", "S - Surveillance", "W - Witness"]
-        },          
+        }, 
+        {
+            "name": "ref",
+            "label": "Reference Standards",
+            "type": "text"
+        },        
         {
             "name": "remarks",
             "label": "Remarks",
