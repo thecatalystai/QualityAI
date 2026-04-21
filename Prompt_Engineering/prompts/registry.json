@@ -1,6 +1,10 @@
 [
     {
-        "name": "Inspection & Testing Plan (ITP)",
+        "name": "Inspection & Testing Plan - ITP",
         "file": "itp.json"
-    }
+    },
+    {
+        "name": "Method of Statement - MOS",
+        "file": "mos.json"
+    }    
 ]
