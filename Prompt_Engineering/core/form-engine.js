@@ -9,11 +9,13 @@ export class FormEngine {
             const div = document.createElement("div");
             div.className = "form-floating mb-3";
 
-            let html = `<label class="form-label">${f.label}</label>`;
+            let html = ``;
 
             if (f.type === "text") {
                 html += `<input class="form-control" id="${f.name}" type="text">`;
             }
+
+            html += `<label class="form-label">${f.label}</label>`;
 
             if (f.type === "textarea") {
                 html += `<textarea class="form-control" id="${f.name}" rows="3"></textarea>`;
