@@ -20,10 +20,10 @@
             "type": "text"
         },        
         {
-            "name": "inspection_stage",
-            "label": "Stages",
+            "name": "components",
+            "label": "Components",
             "type": "multiselect",
-            "options": ["Document Review", "Factory Inspection", "Material Receiving", "Survey", "Preparation", "Construction", "Installation", "Testing", "Commissioning"]
+            "options": ["Purpose", "Scope", "Terms & Definitions", "References", "Tools", "Equipment", "Responsibilities", "Procedure", "Hazard Assessment"]
         },
         {
             "name": "stakeholders",
@@ -33,9 +33,9 @@
         }, 
         {
             "name": "roles",
-            "label": "Roles & Responsibilities",
+            "label": "Roles ",
             "type": "multiselect",
-            "options": ["H - Hold Point", "I - Inspection", "R - Review", "S - Surveillance", "W - Witness"]
+            "options": ["Project Manager", "Project Engineer", "Site Manager", "Site Engineer", "QA/QC Engineer", "Site Supervisor", "Forman", "HSE Officer", "Technican"]
         }, 
         {
             "name": "ref_standards",
