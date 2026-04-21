@@ -21,8 +21,8 @@ export class FormEngine {
 
             if (f.type === "dropdown") {
                 html += `<select class="form-select" id="${f.name}">`;
+                html += `<option value="" selected disabled>${f.name}</option>`;
                 f.options.forEach(o => {
-                    html += `<option value="" selected disabled>${f.name}</option>`;
                     html += `<option value="${o}">${o}</option>`;
                 });
                 html += `</select>`;
@@ -30,8 +30,8 @@ export class FormEngine {
 
             if (f.type === "multiselect") {
                 html += `<select multiple class="form-select" id="${f.name}" style="height: 150px;">`;
+                html += `<option value="" selected disabled>${f.name}</option>`;
                 f.options.forEach(o => {
-                    html += `<option value="" selected disabled>${f.name}</option>`;
                     html += `<option value="${o}" selected>${o}</option>`;
                     //html += `<option value="${o.value}">${o.label}</option>`;
                 });
