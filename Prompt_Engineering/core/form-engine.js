@@ -15,8 +15,6 @@ export class FormEngine {
                 html += `<input class="form-control" id="${f.name}" type="text">`;
             }
 
-            html += `<label for="${f.name}" class="form-label">${f.label}</label>`;
-
             if (f.type === "textarea") {
                 html += `<textarea class="form-control" id="${f.name}" rows="3"></textarea>`;
             }
@@ -37,7 +35,9 @@ export class FormEngine {
                 });
                 html += `</select>`;
             }
-
+            
+            html += `<label for="${f.name}" class="form-label">${f.label}</label>`;
+            
             div.innerHTML = html;
             container.appendChild(div);
         });
