@@ -28,7 +28,7 @@ export class FormEngine {
             }
 
             if (f.type === "multiselect") {
-                html += `<select multiple class="form-select" id="${f.name}">`;
+                html += `<select multiple class="form-select" id="${f.name}" style="height: 150px;">`;
                 f.options.forEach(o => {
                     html += `<option value="${o}" selected>${o}</option>`;
                     //html += `<option value="${o.value}">${o.label}</option>`;
