@@ -12,16 +12,17 @@ export class FormEngine {
             let html = ``;
 
             if (f.type === "text") {
-                html += `<input class="form-control" id="${f.name}" type="text">`;
+                html += `<input class="form-control" id="${f.name}" placeholder="${f.name}" type="text">`;
             }
 
             if (f.type === "textarea") {
-                html += `<textarea class="form-control" id="${f.name}" rows="3"></textarea>`;
+                html += `<textarea class="form-control" id="${f.name}" placeholder="${f.name}" rows="5"></textarea>`;
             }
 
             if (f.type === "dropdown") {
                 html += `<select class="form-select" id="${f.name}">`;
                 f.options.forEach(o => {
+                    html += `<option value="" selected disabled>${f.name}</option>`;
                     html += `<option value="${o}">${o}</option>`;
                 });
                 html += `</select>`;
@@ -30,6 +31,7 @@ export class FormEngine {
             if (f.type === "multiselect") {
                 html += `<select multiple class="form-select" id="${f.name}" style="height: 150px;">`;
                 f.options.forEach(o => {
+                    html += `<option value="" selected disabled>${f.name}</option>`;
                     html += `<option value="${o}" selected>${o}</option>`;
                     //html += `<option value="${o.value}">${o.label}</option>`;
                 });
