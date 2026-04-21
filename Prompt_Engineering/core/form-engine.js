@@ -15,7 +15,7 @@ export class FormEngine {
                 html += `<input class="form-control" id="${f.name}" type="text">`;
             }
 
-            html += `<label class="form-label">${f.label}</label>`;
+            html += `<label for="${f.name}" class="form-label">${f.label}</label>`;
 
             if (f.type === "textarea") {
                 html += `<textarea class="form-control" id="${f.name}" rows="3"></textarea>`;
