@@ -29,6 +29,8 @@ window.loadSchema = async function () {
     const file = document.getElementById("promptSelector").value;
     currentSchema = await loader.loadSchema(file);
     formEngine.render(currentSchema);
+
+    document.getElementById("prompt-body").classList.remove("d-none");
 };
 
 /* GENERATE PROMPT */
