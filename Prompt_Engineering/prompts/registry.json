@@ -6,5 +6,9 @@
     {
         "name": "Method of Statement - MOS",
         "file": "mos.json"
-    }    
+    },
+    {
+        "name": "Inspection Checklists",
+        "file": "chk.json"
+    }     
 ]
