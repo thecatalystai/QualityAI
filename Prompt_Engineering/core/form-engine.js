@@ -7,7 +7,7 @@ export class FormEngine {
         schema.fields.forEach(f => {
 
             const div = document.createElement("div");
-            div.className = "mb-3";
+            div.className = "form-floating mb-3";
 
             let html = `<label class="form-label">${f.label}</label>`;
 
