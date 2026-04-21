@@ -36,7 +36,7 @@ export class FormEngine {
                 html += `</select>`;
             }
             
-            html += `<label for="${f.name}" class="form-label">${f.label}</label>`;
+            html += `<label for="${f.name}">${f.label}</label>`;
             
             div.innerHTML = html;
             container.appendChild(div);
