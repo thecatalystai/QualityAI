@@ -39,7 +39,66 @@ export class FormEngine {
             }
             
             html += `<label for="${f.name}">${f.label}</label>`;
-            
+
+            if (f.type === "pdftext") {
+
+                                            html += `
+                                                <div class="pdf-text-extractor" id="${f.name}_wrapper">
+                                        
+                                                    <input type="file"
+                                                           id="${f.name}_file"
+                                                           accept="application/pdf"
+                                                           class="form-control" />
+                                        
+                                                </div>
+                                        
+                                                <script>
+                                                    (function () {
+                                        
+                                                        const input = document.getElementById("${f.name}_file");
+                                                        const wrapper = document.getElementById("${f.name}_wrapper");
+                                        
+                                                        input.addEventListener("change", async (e) => {
+                                        
+                                                            const file = e.target.files[0];
+                                                            if (!file) return;
+                                        
+                                                            const reader = new FileReader();
+                                        
+                                                            reader.onload = async function () {
+                                        
+                                                                const typedarray = new Uint8Array(this.result);
+                                        
+                                                                const pdf = await pdfjsLib.getDocument(typedarray).promise;
+                                        
+                                                                let fullText = "";
+                                        
+                                                                for (let i = 1; i <= pdf.numPages; i++) {
+                                                                    const page = await pdf.getPage(i);
+                                                                    const content = await page.getTextContent();
+                                        
+                                                                    fullText += content.items
+                                                                        .map(item => item.str)
+                                                                        .join(" ") + "\\n";
+                                                                }
+                                        
+                                                                wrapper.innerHTML = `
+                                                                    <textarea
+                                                                        class="form-control"
+                                                                        id="${f.name}"
+                                                                        name="${f.name}"
+                                                                        rows="6">${fullText.trim()}</textarea>
+                                                                `;
+                                                            };
+                                        
+                                                            reader.readAsArrayBuffer(file);
+                                                        });
+                                        
+                                                    })();
+                                                </script>
+                                            `;
+                                        }
+
             div.innerHTML = html;
             container.appendChild(div);
         });
