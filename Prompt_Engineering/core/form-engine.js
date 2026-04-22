@@ -16,7 +16,7 @@ export class FormEngine {
             }
 
             if (f.type === "textarea") {
-                html += `<textarea class="form-control" id="${f.name}" placeholder="${f.label}" rows="5"></textarea>`;
+                html += `<textarea class="form-control" id="${f.name}" placeholder="${f.label}" rows="6"></textarea>`;
             }
 
             if (f.type === "dropdown") {
