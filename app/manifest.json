@@ -1,0 +1,19 @@
+{
+  "name": "The Catalyst AI — Prompt Engine",
+  "short_name": "Prompt Engine",
+  "description": "Generate expert QA/QC construction prompts — ITPs, Method Statements, and Inspection Checklists.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0a0e1a",
+  "theme_color": "#0a0e1a",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["productivity", "utilities", "business"]
+}
