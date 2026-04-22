@@ -10,5 +10,9 @@
     {
         "name": "Inspection Checklists",
         "file": "chk.json"
-    }     
+    },
+    {
+        "name": "ATS CV–Job Match Scoring",
+        "file": "job_cv_match.json"
+    }       
 ]
