@@ -1,53 +1,19 @@
 {
-    "id": "mos",
+    "id": "job_cv_match",
     "version": "1.0",
 
-    "fields": [
+    "fields": [       
         {
-            "name": "work_title",
-            "label": "Work Title",
-            "type": "text"
-        },
-        {
-            "name": "discipline",
-            "label": "Discipline",
-            "type": "dropdown",
-            "options": ["Civil Engineering", "Mechanical Engineering", "Electrical Engineering"]
-        },
-        {
-            "name": "activity",
-            "label": "Construction Activity",
-            "type": "text"
-        },        
-        {
-            "name": "components",
-            "label": "Components",
-            "type": "multiselect",
-            "options": ["Purpose", "Scope", "Terms & Definitions", "References", "Tools", "Equipment", "Responsibilities", "Procedure", "Hazard Assessment"]
-        },
-        {
-            "name": "stakeholders",
-            "label": "Stakeholder",
-            "type": "multiselect",
-            "options": ["Client", "Contractor", "Consultant", "QA/QC - Quality Control", "Third Party Testing Service", "HSE - Health & Safety", "Vendor", "PMO", "Operator", "Developer", "Owner", "Sub Contractor"]
-        }, 
-        {
-            "name": "roles",
-            "label": "Roles ",
-            "type": "multiselect",
-            "options": ["Project Manager", "Project Engineer", "Site Manager", "Site Engineer", "QA/QC Engineer", "Site Supervisor", "Forman", "HSE Officer", "Technican"]
-        }, 
-        {
-            "name": "ref_standards",
-            "label": "Reference Standards",
-            "type": "text"
-        },        
-        {
-            "name": "remarks",
-            "label": "Remarks",
+            "name": "cv",
+            "label": "Your Resume",
             "type": "textarea"
-        }
+        },
+        {
+            "name": "req",
+            "label": "Job Announcement",
+            "type": "textarea"
+        },
     ],
 
-    "template": "You are an expert construction engineer and HSE specialist responsible for preparing a comprehensive Method Statement (MOS) for {{work_title}}, related to the {{discipline}}, involving stakeholders: {{stakeholders}}, and assigned roles: {{roles}}, in accordance with reference standards: {{ref_standards}}, and considering all constraints, interfaces, and remarks provided in: {{remarks}}; you must generate a complete, structured, and professional Method Statement suitable for construction execution, QA/QC compliance, and HSE management systems. The Method Statement shall systematically define and decompose {{work_title}} into logically sequenced construction activities aligned with the {{discipline}} scope of work, covering the full execution lifecycle including pre-construction planning, material handling, site preparation, execution methodology, inspection and testing coordination, and post-execution activities such as protection, reinstatement, and documentation. The MOS MUST be strictly structured based on the following components: {{components}}, and each component shall be fully developed, clearly separated, and written as a formal section with appropriate sub-structure, ensuring that no component from {{components}} is omitted, merged, or loosely addressed. The content shall be highly detailed, technically precise, and execution-oriented, with all activities logically sequenced, non-redundant, and aligned with actual construction workflow, while responsibilities are clearly assigned to stakeholders from {{stakeholders}} and mapped appropriately to roles from {{roles}} without ambiguity. All references, procedures, and technical requirements must be strictly derived from {{ref_standards}} and relevant industry practices, and the methodology shall include step-by-step execution procedures with clear technical instructions, integrated inspection coordination points, and defined workmanship criteria. Health, Safety, and Environmental requirements must incorporate hazard identification, risk mitigation measures, PPE requirements, and emergency response procedures aligned with {{remarks}}, while quality control provisions must align with ITP principles ensuring traceability, inspection points, and proper documentation without duplicating the ITP itself. Materials, equipment, and manpower descriptions shall include specifications, capacities, competencies, and operational constraints, and risk assessment content shall be structured, measurable, and directly applicable to site execution conditions. Documentation and records must be clearly defined for each relevant stage of the work, and execution logic shall ensure decomposition of {{work_title}} into preparation, execution, inspection, and completion phases with full lifecycle coverage including pre-execution requirements, construction activities, verification steps, and post-execution controls, while maintaining consistency, traceability, and alignment across all components defined in {{components}}. The final output must be a fully formatted Method Statement document with clear headings and subheadings corresponding strictly to {{components}}, written using formal engineering language and standard construction terminology, without any explanatory text, assumptions, or content outside the structured Method Statement, and ensuring that no placeholders remain unresolved except the defined input variables ({{...}})."
+    "template": "You are an expert Talent Acquisition Analyst, ATS Optimization Specialist, and Senior Recruiter. Your task is to evaluate the candidate CV {{cv}} against the job description {{req}} and produce a highly structured, data-driven compatibility report. Analyze the match across multiple dimensions including keyword alignment, experience relevance, skills overlap, education fit, industry match, location/work eligibility, and ATS formatting quality. First extract and compare all critical job keywords (technical skills, tools, certifications, soft skills, and domain terms) against the CV and calculate exact, partial, and missing keyword coverage percentages. Then evaluate experience alignment by comparing required vs actual years, role similarity, responsibility overlap, and seniority fit. Assess education match including degree level, field relevance, and certifications. Analyze industry alignment by checking direct, adjacent, or unrelated domain experience. Break down skills into technical and soft skills, identifying matched, missing, and irrelevant skills. Evaluate location and work eligibility compatibility including onsite/remote/hybrid fit. Assess ATS friendliness based on formatting, keyword density, structure, readability, use of standard headings, chronological clarity, and parsing optimization. Assign each category a score from 0–100 with clear justification. Then compute a weighted overall match score using: Keywords 25%, Experience 25%, Skills 20%, Industry 10%, Education 10%, ATS friendliness 10%. Provide a final classification (Excellent Match 85–100, Good 70–84, Moderate 50–69, Weak 30–49, Poor below 30). Output must include a summary with overall score and hiring recommendation, a detailed score table for all categories, keyword gap analysis listing matched and missing keywords, experience alignment breakdown, skills gap analysis, ATS strengths and weaknesses, and a set of 5–10 actionable CV improvement recommendations including missing keywords to add and structural improvements. Be objective, strict, and realistic—do not inflate scores, penalize missing critical requirements heavily, and prioritize job description requirements over CV content."
 }
