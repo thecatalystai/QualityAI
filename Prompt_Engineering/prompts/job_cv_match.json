@@ -4,6 +4,11 @@
 
     "fields": [       
         {
+            "name": "pdfcv",
+            "label": "Your Resume",
+            "type": "pdftext"
+        },
+        {
             "name": "cv",
             "label": "Your Resume",
             "type": "textarea"
