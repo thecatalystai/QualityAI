@@ -5,7 +5,7 @@
     "fields": [       
         {
             "name": "cv",
-            "label": "Your Resume",
+            "label": "Upload Your Resume",
             "type": "pdftext"
         },
         {
