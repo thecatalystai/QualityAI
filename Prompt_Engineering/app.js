@@ -46,8 +46,10 @@ window.generatePrompt = function () {
     // Copy to clipboard
     navigator.clipboard.writeText(prompt).then(() => {
         alert("✅ Prompt copied successfully! You can now paste it into any generative AI tool to generate content.");
+        document.getElementById("alertContainer").innerHTML = '<div class="alert alert-primary" role="alert">Prompt copied successfully!</div>';
     }).catch(() => {
         alert("⚠️ Failed to copy prompt. Please manually copy it from the output area.");
+        document.getElementById("alertContainer").innerHTML = '<div class="alert alert-danger" role="alert">Failed to copy prompt.</div>';
     });
 };
 
