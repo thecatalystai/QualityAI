@@ -36,6 +36,8 @@ export class FormEngine {
                 html += `</select>`;
             }
 
+            html += `<label for="${f.name}">${f.label}</label>`;
+            
             // PDF FIELD (ONLY UI)
             if (f.type === "pdftext") {
                 html += `
@@ -47,9 +49,7 @@ export class FormEngine {
                     </div>
                 `;
             }
-
-            html += `<label for="${f.name}">${f.label}</label>`;
-
+            
             div.innerHTML = html;
             container.appendChild(div);
         });
