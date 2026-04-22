@@ -12,16 +12,16 @@ export class FormEngine {
             let html = ``;
 
             if (f.type === "text") {
-                html += `<input class="form-control" id="${f.name}" placeholder="${f.name}" type="text">`;
+                html += `<input class="form-control" id="${f.name}" placeholder="${f.label}" type="text">`;
             }
 
             if (f.type === "textarea") {
-                html += `<textarea class="form-control" id="${f.name}" placeholder="${f.name}" rows="5" style="hieght:200px;"></textarea>`;
+                html += `<textarea class="form-control" id="${f.name}" placeholder="${f.label}" rows="5" style="hieght:200px;"></textarea>`;
             }
 
             if (f.type === "dropdown") {
                 html += `<select class="form-select" id="${f.name}">`;
-                html += `<option value="" selected disabled>${f.name}</option>`;
+                html += `<option value="" selected disabled>${f.label}</option>`;
                 f.options.forEach(o => {
                     html += `<option value="${o}">${o}</option>`;
                 });
@@ -30,7 +30,7 @@ export class FormEngine {
 
             if (f.type === "multiselect") {
                 html += `<select multiple class="form-select" id="${f.name}" style="height: 150px;">`;
-                html += `<option value="" selected disabled>${f.name}</option>`;
+                html += `<option value="" selected disabled>${f.label}</option>`;
                 f.options.forEach(o => {
                     html += `<option value="${o}" selected>${o}</option>`;
                     //html += `<option value="${o.value}">${o.label}</option>`;
