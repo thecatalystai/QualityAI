@@ -22,7 +22,7 @@
         {
             "name": "date",
             "label": "Date Observed",
-            "type": "date"
+            "type": "text"
         },
         {
             "name": "known_cause",
