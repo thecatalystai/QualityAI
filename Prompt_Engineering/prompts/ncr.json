@@ -1,0 +1,45 @@
+{
+    "id": "mos",
+    "version": "1.0",
+
+    "fields": [
+        {
+            "name": "issue",
+            "label": "Issue Description",
+            "type": "textarea"
+        },
+        {
+            "name": "location",
+            "label": "Location",
+            "type": "text"
+        },
+        {
+            "name": "discipline",
+            "label": "Discipline",
+            "type": "dropdown",
+            "options": ["Civil", "Mechanical", "Electrical", "Instrumentation", "Other"]
+        },
+        {
+            "name": "date",
+            "label": "Date Observed",
+            "type": "date"
+        },
+        {
+            "name": "known_cause",
+            "label": "Known / Suspected Cause",
+            "type": "textarea"
+        },
+        {
+            "name": "action_taken",
+            "label": "Action Already Taken",
+            "type": "textarea"
+        },
+        {
+            "name": "reference",
+            "label": "Reference (Drawing / Spec / Code)",
+            "type": "text"
+        }
+    ],
+
+    "template": "You are an expert QA/QC Engineer responsible for preparing a comprehensive Non-Conformance Report (NCR) for the issue described as {{issue}}, occurring at {{location}}, related to the {{discipline}}, observed on {{date}}, considering any known or suspected cause provided in {{known_cause}}, any immediate action already taken in {{action_taken}}, and in accordance with reference requirements defined in {{reference}}; you must generate a complete, structured, and professional NCR suitable for construction QA/QC systems, audit compliance, and project quality management processes. The NCR shall systematically define and analyze the non-conformance by clearly articulating the deviation from specified requirements, establishing objective evidence, and aligning the issue with applicable codes, specifications, or standards referenced in {{reference}}, while maintaining full traceability and technical accuracy. The NCR MUST be strictly structured into the following components: Non-Conformance Statement, Root Cause Analysis, Corrective Actions, Preventive Actions, and QA/QC Conclusion, and each component shall be fully developed, clearly separated, and written as a formal section with appropriate sub-structure, ensuring no component is omitted, merged, or loosely addressed. The Non-Conformance Statement shall be precise, evidence-based, and clearly define the deviation including location, condition, and violated requirement; the Root Cause Analysis shall systematically identify both immediate and underlying causes using structured reasoning categorized under Method, Material, Manpower, Machine, or Management, ensuring that conclusions are logical, non-speculative, and directly linked to the issue described in {{issue}} and {{known_cause}}. Corrective Actions shall define specific, measurable, and practical steps required to rectify the identified non-conformance, including responsibility assignment, execution timeline, and verification methodology to confirm compliance restoration, while incorporating any actions already taken in {{action_taken}} without redundancy. Preventive Actions shall focus on eliminating recurrence by addressing root causes through system improvements, process controls, training, or procedural enhancements, ensuring alignment with project quality management systems and long-term effectiveness. All actions and analyses shall be technically sound, execution-oriented, and aligned with QA/QC best practices and relevant standards defined in {{reference}}, ensuring clarity, accountability, and audit readiness. The NCR shall maintain a logical flow of Issue → Cause → Correction → Prevention, with all sections interconnected, non-redundant, and consistent in terminology and technical depth. The final output must be a fully formatted NCR document with clear headings and subheadings corresponding strictly to the defined components, written using formal engineering language and standard QA/QC terminology, without any explanatory text, assumptions beyond provided inputs, or content outside the structured NCR, and ensuring that no placeholders remain unresolved except the defined input variables ({{...}})."
+}
