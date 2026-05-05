@@ -12,6 +12,10 @@
         "file": "chk.json"
     },
     {
+        "name": "Non Conformance Report - NCR",
+        "file": "ncr.json"
+    },
+    {
         "name": "ATS CV–Job Match Scoring",
         "file": "job_cv_match.json"
     }       
