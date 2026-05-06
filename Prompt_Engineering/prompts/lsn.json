@@ -4,14 +4,19 @@
 
     "fields": [  
                 {
-                  "name": "issue",
-                  "label": "Issue",
+                  "name": "project_context",
+                  "label": "Project Context",
                   "type": "textarea"
                 },
                 {
                   "name": "location",
                   "label": "Location",
                   "type": "text"
+                },
+                {
+                  "name": "issue",
+                  "label": "Issue",
+                  "type": "textarea"
                 },
                 {
                   "name": "discipline",
@@ -29,8 +34,13 @@
                   "type": "textarea"
                 },
                 {
-                  "name": "project_context",
-                  "label": "Project Context",
+                  "name": "preventive_action",
+                  "label": "Preventive Action",
+                  "type": "textarea"
+                },
+                {
+                  "name": "lesson_learned",
+                  "label": "Lesson Learned",
                   "type": "textarea"
                 },
                 {
