@@ -46,68 +46,66 @@
         <!-- LEFT SIDE: PROMPT ENGINE -->
         <div class="col-lg-6">
             
-    <!-- SELECTOR -->
-    <div class="card mb-3 shadow-sm">
-        <div class="card-header">Select Prompt Type</div>
-        <div class="card-body row g-3 align-items-end">
-
-            <div class="col-md-12">
-                <select id="promptSelector" class="form-select" onchange="loadSchema()">
-                    <option value="" selected disabled>Select prompt type...</option>
-                </select>
+            <!-- SELECTOR -->
+            <div class="card mb-3 shadow-sm">
+                <div class="card-header">Select Prompt Type</div>
+                <div class="card-body row g-3 align-items-end">
+        
+                    <div class="col-md-12">
+                        <select id="promptSelector" class="form-select" onchange="loadSchema()">
+                            <option value="" selected disabled>Select prompt type...</option>
+                        </select>
+                    </div>
+        
+                </div>
             </div>
 
-        </div>
-    </div>
-
-    <div id="prompt-body" class="d-none">
-    <!-- FORM -->
-    <div class="card mb-3 shadow-sm">
-        <div class="card-header">Tailor your Prompt</div>
-        <div class="card-body" id="formArea">
-            <p class="text-muted">Select a prompt type to begin</p>
-        </div>
-    </div>
-
-    <!-- ACTION -->
-    <button class="btn btn-success w-100 mb-3" onclick="generatePrompt()">
-        Generate Prompt
-    </button>
-    <div id="alertContainer"></div>
-
-    <!-- OUTPUT -->
-    <div class="card mb-3 shadow-sm">
-        <div class="card-header">Generated Prompt</div>
-        <div class="card-body">
-            <div id="output" class="mb-0"></div>
-        </div>
-    </div>
-
+            <div id="prompt-body" class="d-none">
+                <!-- FORM -->
+                <div class="card mb-3 shadow-sm">
+                    <div class="card-header">Tailor your Prompt</div>
+                    <div class="card-body" id="formArea">
+                        <p class="text-muted">Select a prompt type to begin</p>
+                    </div>
                 </div>
+    
+                <!-- ACTION -->
+                <button class="btn btn-success w-100 mb-3" onclick="generatePrompt()">
+                    Generate Prompt
+                </button>
+                <div id="alertContainer"></div>
+    
+                <!-- OUTPUT -->
+                <div class="card mb-3 shadow-sm">
+                    <div class="card-header">Generated Prompt</div>
+                    <div class="card-body">
+                        <div id="output" class="mb-0"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
         <!-- RIGHT SIDE: HISTORY -->
         <div class="col-lg-6">
             
-    <!-- HISTORY -->
-    <div class="card shadow-sm">
-        <div class="card-header">History</div>
-        <div class="card-body" id="history"></div>
-    </div>
-
-    </div>
-    <!-- Footer -->
-    <div class="card shadow-sm">
-        <div class="card-header">Prepared By</div>
-        <div class="card-body">
-            <!-- LinkedIn Badge Script --> 
-            <script src="https://platform.linkedin.com/badges/js/profile.js" async defer></script> 
-            <!-- Profile Badge --> 
-            <div class="badge-base LI-profile-badge" data-locale="en_US" data-size="medium" data-theme="light" data-type="VERTICAL" data-vanity="waqarahmadmalik" data-version="v1"> 
-                <a class="badge-base__link LI-simple-link" href="https://www.linkedin.com/in/waqarahmadmalik/"> Waqar Ahmad Malik </a> 
+            <!-- HISTORY -->
+            <div class="card shadow-sm h-100">
+                <div class="card-header">History</div>
+                <div class="card-body" id="history"></div>
             </div>
-        </div>
-    </div>
-</div>
+
+            <!-- Footer -->
+            <div class="card shadow-sm">
+                <div class="card-header">Prepared By</div>
+                <div class="card-body">
+                    <!-- LinkedIn Badge Script --> 
+                    <script src="https://platform.linkedin.com/badges/js/profile.js" async defer></script> 
+                    <!-- Profile Badge --> 
+                    <div class="badge-base LI-profile-badge" data-locale="en_US" data-size="medium" data-theme="light" data-type="VERTICAL" data-vanity="waqarahmadmalik" data-version="v1"> 
+                        <a class="badge-base__link LI-simple-link" href="https://www.linkedin.com/in/waqarahmadmalik/"> Waqar Ahmad Malik </a> 
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
     
