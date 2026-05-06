@@ -62,9 +62,9 @@
 
             <div id="prompt-body" class="d-none">
                 <!-- FORM -->
-                <div class="card mb-3 shadow-sm">
+                <div class="card mb-3 shadow-sm h-500">
                     <div class="card-header">Tailor your Prompt</div>
-                    <div class="card-body" id="formArea">
+                    <div class="card-body overflow-auto" id="formArea" style="max-height: 40vh;">
                         <p class="text-muted">Select a prompt type to begin</p>
                     </div>
                 </div>
@@ -76,9 +76,9 @@
                 <div id="alertContainer"></div>
     
                 <!-- OUTPUT -->
-                <div class="card mb-3 shadow-sm">
+                <div class="card mb-3 shadow-sm h-300">
                     <div class="card-header">Generated Prompt</div>
-                    <div class="card-body">
+                    <div class="card-body overflow-auto" style="max-height: 40vh;">
                         <div id="output" class="mb-0"></div>
                     </div>
                 </div>
@@ -91,7 +91,7 @@
             <!-- HISTORY -->
             <div class="card shadow-sm h-500">
                 <div class="card-header">History</div>
-                <div class="card-body overflow-y-scroll" id="history" style="max-height: 50vh;"></div>
+                <div class="card-body overflow-auto" id="history" style="max-height: 50vh;"></div>
             </div>
 
             <!-- Footer -->
