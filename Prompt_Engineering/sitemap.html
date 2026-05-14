@@ -22,7 +22,7 @@ async function generateSitemap() {
 
   try {
     // fetch JSON file
-    const response = await fetch("/Prompt_Engineering/prompts/registery.json");
+    const response = await fetch("/Prompt_Engineering/prompts/registry.json");
     const data = await response.json();
 
     const container = document.getElementById("sitemap");
