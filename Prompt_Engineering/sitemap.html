@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Sitemap</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 20px; }
+    h1 { margin-bottom: 20px; }
+    ul { line-height: 1.8; }
+    a { text-decoration: none; color: #0073e6; }
+    a:hover { text-decoration: underline; }
+  </style>
+</head>
+<body>
+
+<h1>Sitemap</h1>
+<ul id="sitemap"></ul>
+
+<script>
+async function generateSitemap() {
+  const BASE_URL = "/prompts";
+
+  try {
+    // fetch JSON file
+    const response = await fetch("/prompts/registery.json");
+    const data = await response.json();
+
+    const container = document.getElementById("sitemap");
+
+    data.forEach(item => {
+      const slug = item.file.replace(".json", "");
+
+      const li = document.createElement("li");
+      const link = document.createElement("a");
+
+      link.href = `${BASE_URL}/${slug}`;
+      link.textContent = item.name;
+
+      li.appendChild(link);
+      container.appendChild(li);
+    });
+
+  } catch (err) {
+    console.error("Error loading sitemap:", err);
+  }
+}
+
+// run on page load
+generateSitemap();
+</script>
+
+</body>
+</html>
