@@ -1,5 +1,6 @@
 export class BotEngine {
-start(config) {
+  
+render(schema) {
   FormBot.init({
   chat_containerId: "chat-form",
   chat_form_title: "Contact Us",
