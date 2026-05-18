@@ -1,4 +1,4 @@
-import { FormBot } from "../plugins/FormBot/formbot.js";
+import "../plugins/FormBot/formbot.js";
 
   const questions = [];
 
