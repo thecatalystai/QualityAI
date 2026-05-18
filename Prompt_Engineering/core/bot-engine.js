@@ -1,188 +1,159 @@
 export class BotEngine {
-  constructor(options = {}) {
-    this.containerId = options.containerId || "chatArea";
-    this.current = 0;
-    this.answers = {};
-    this.schema = null;
 
-    this.container = document.getElementById(this.containerId);
-
-    if (!this.container) {
-      throw new Error("Chat container not found");
+  new FormBot({
+  chat_containerId: "chat-form",
+  chat_form_title: "Contact Us",
+  questions: [
+    {
+      label: "What's your name?",
+      name: "name",
+      type: "text",
+      attrs: { required: true, placeholder: "John Doe" }
+    },
+    {
+      label: "What's your email address?",
+      name: "email",
+      type: "email",
+      attrs: { required: true, placeholder: "john@example.com" }
+    },
+    {
+      label: "Thanks! We'll be in touch soon.",
+      name: "end_message",
+      type: "message"
     }
+  ],
+  onComplete: (answers) => {
+    console.log("Form submitted:", answers);
   }
+});
+      
+    render(schema) {
+        const container = document.getElementById("formArea");
+        container.innerHTML = "";
 
-  // ---------------------------
-  // INIT
-  // ---------------------------
-  start(schema) {
-    this.schema = schema;
-    this.current = 0;
-    this.answers = {};
+        schema.fields.forEach(f => {
 
-    this.container.innerHTML = "";
+            const div = document.createElement("div");
+            div.className = "form-floating mb-3";
 
-    this.renderBotMessage("Hello 👋");
-    this.next();
-  }
+            let html = ``;
 
-  // ---------------------------
-  // UI HELPERS
-  // ---------------------------
-  renderBotMessage(text) {
-    const div = document.createElement("div");
-    div.className = "bot-msg";
-    div.innerText = text;
-    this.container.appendChild(div);
-    this.scroll();
-  }
+            if (f.type === "text") {
+                html += `<input class="form-control" id="${f.name}" placeholder="${f.label}" type="text">`;
+            }
 
-  renderUserMessage(text) {
-    const div = document.createElement("div");
-    div.className = "user-msg";
-    div.innerText = text;
-    this.container.appendChild(div);
-    this.scroll();
-  }
+            if (f.type === "textarea") {
+                html += `<textarea class="form-control" id="${f.name}" placeholder="${f.label}" rows="6"></textarea>`;
+            }
 
-  scroll() {
-    this.container.scrollTop = this.container.scrollHeight;
-  }
+            if (f.type === "dropdown") {
+                html += `<select class="form-select" id="${f.name}">`;
+                html += `<option value="" selected disabled>${f.label}</option>`;
+                f.options.forEach(o => {
+                    html += `<option value="${o}">${o}</option>`;
+                });
+                html += `</select>`;
+            }
 
-  // ---------------------------
-  // ENGINE CORE
-  // ---------------------------
-  next() {
-    if (!this.schema || this.current >= this.schema.fields.length) {
-      this.finish();
-      return;
+            if (f.type === "multiselect") {
+                html += `<select multiple class="form-select" id="${f.name}" style="height:150px;">`;
+                f.options.forEach(o => {
+                    html += `<option value="${o}">${o}</option>`;
+                });
+                html += `</select>`;
+            }
+
+            html += `<label for="${f.name}">${f.label}</label>`;
+            
+            // PDF FIELD (ONLY UI)
+            if (f.type === "pdftext") {
+                html += `
+                    <div id="${f.name}_wrapper">
+                        <input type="file"
+                               id="${f.name}_file"
+                               accept="application/pdf"
+                               class="form-control" />
+                    </div>
+                `;
+            }
+            
+            div.innerHTML = html;
+            container.appendChild(div);
+        });
+
+        // AFTER RENDER → bind PDF handlers
+        this.bindPdfFields(schema);
     }
 
-    const field = this.schema.fields[this.current];
+    bindPdfFields(schema) {
 
-    // skip hidden fields
-    if (field.type === "hidden") {
-      this.answers[field.name] = field.value || "";
-      this.current++;
-      return this.next();
+        schema.fields.forEach(f => {
+
+            if (f.type !== "pdftext") return;
+
+            const input = document.getElementById(f.name + "_file");
+            const wrapper = document.getElementById(f.name + "_wrapper");
+
+            if (!input || !wrapper) return;
+
+            input.addEventListener("change", async (e) => {
+
+                const file = e.target.files[0];
+                if (!file) return;
+
+                wrapper.innerHTML = "<div class='text-muted'>Processing PDF...</div>";
+
+                const reader = new FileReader();
+
+                reader.onload = async function () {
+
+                    const typedarray = new Uint8Array(this.result);
+
+                    const pdf = await pdfjsLib.getDocument(typedarray).promise;
+
+                    let fullText = "";
+
+                    for (let i = 1; i <= pdf.numPages; i++) {
+
+                        const page = await pdf.getPage(i);
+                        const content = await page.getTextContent();
+
+                        fullText += content.items
+                            .map(item => item.str)
+                            .join(" ") + "\n";
+                    }
+
+                    // Replace file input with textarea (FINAL OUTPUT)
+                    wrapper.innerHTML =
+                        '<textarea class="form-control" ' +
+                        'id="' + f.name + '" ' +
+                        'name="' + f.name + '" rows="6">' +
+                        fullText.replace(/</g, "&lt;").replace(/>/g, "&gt;") +
+                        '</textarea>';
+                };
+
+                reader.readAsArrayBuffer(file);
+            });
+        });
     }
 
-    this.renderBotMessage(field.label);
+    collect(schema) {
+        const data = {};
 
-    this.renderInput(field);
-  }
+        schema.fields.forEach(f => {
 
-  // ---------------------------
-  // INPUT RENDERER
-  // ---------------------------
-  renderInput(field) {
-    const wrapper = document.createElement("div");
-    wrapper.className = "bot-input-wrapper";
+            const el = document.getElementById(f.name);
+            if (!el) return;
 
-    let input;
+            if (el.multiple) {
+                data[f.name] = Array.from(el.selectedOptions)
+                    .map(o => o.value)
+                    .join(", ");
+            } else {
+                data[f.name] = el.value;
+            }
+        });
 
-    // TEXT
-    if (field.type === "text" || field.type === "email" || field.type === "number") {
-      input = document.createElement("input");
-      input.type = field.type;
+        return data;
     }
-
-    // TEXTAREA
-    else if (field.type === "textarea") {
-      input = document.createElement("textarea");
-    }
-
-    // DROPDOWN
-    else if (field.type === "dropdown") {
-      input = document.createElement("select");
-
-      const empty = document.createElement("option");
-      empty.value = "";
-      empty.textContent = "Select...";
-      input.appendChild(empty);
-
-      field.options.forEach(opt => {
-        const o = document.createElement("option");
-        o.value = opt;
-        o.textContent = opt;
-        input.appendChild(o);
-      });
-    }
-
-    // MULTISELECT
-    else if (field.type === "multiselect") {
-      input = document.createElement("select");
-      input.multiple = true;
-
-      field.options.forEach(opt => {
-        const o = document.createElement("option");
-        o.value = opt;
-        o.textContent = opt;
-        input.appendChild(o);
-      });
-    }
-
-    // FALLBACK
-    else {
-      input = document.createElement("input");
-      input.type = "text";
-    }
-
-    input.className = "bot-input";
-
-    // ENTER HANDLER
-    input.addEventListener("keydown", (e) => {
-      if (e.key === "Enter") {
-        this.handleAnswer(field, input);
-      }
-    });
-
-    wrapper.appendChild(input);
-    this.container.appendChild(wrapper);
-
-    input.focus();
-  }
-
-  // ---------------------------
-  // ANSWER HANDLER
-  // ---------------------------
-  handleAnswer(field, input) {
-    let value;
-
-    // MULTISELECT
-    if (field.type === "multiselect") {
-      value = Array.from(input.selectedOptions).map(o => o.value);
-
-      if (value.length === 0) return;
-      value = value.join(", ");
-    }
-
-    // NORMAL INPUT
-    else {
-      value = input.value.trim();
-
-      if (field.required && !value) return;
-    }
-
-    this.renderUserMessage(value);
-
-    this.answers[field.name] = value;
-
-    // cleanup input
-    input.parentElement.remove();
-
-    this.current++;
-    this.next();
-  }
-
-  // ---------------------------
-  // FINISH
-  // ---------------------------
-  finish() {
-    this.renderBotMessage("Thanks! Processing your response...");
-
-    if (this.schema.onComplete) {
-      this.schema.onComplete(this.answers);
-    }
-  }
 }
