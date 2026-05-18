@@ -1,5 +1,6 @@
 import { SchemaLoader } from "./core/schema-loader.js";
 import { FormEngine } from "./core/form-engine.js";
+import { BotEngine } from "./core/bot-engine.js";
 import { PromptEngine } from "./core/prompt-engine.js";
 import { Storage } from "./core/storage.js";
 
