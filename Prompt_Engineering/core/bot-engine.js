@@ -1,6 +1,6 @@
 export class BotEngine {
 
-  new FormBot({
+  FormBot.init({
   chat_containerId: "chat-form",
   chat_form_title: "Contact Us",
   questions: [
@@ -26,7 +26,7 @@ export class BotEngine {
     console.log("Form submitted:", answers);
   }
 });
-      
+/*      
     render(schema) {
         const container = document.getElementById("formArea");
         container.innerHTML = "";
@@ -155,5 +155,5 @@ export class BotEngine {
         });
 
         return data;
-    }
+    }*/
 }
