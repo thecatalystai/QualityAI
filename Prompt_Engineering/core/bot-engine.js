@@ -1,3 +1,5 @@
+import { Storage } from "./plugins/FormBot/formbot.js";
+
 export class BotEngine {
   
 render(schema) {
