@@ -1,5 +1,5 @@
 export class BotEngine {
-
+start(config) {
   FormBot.init({
   chat_containerId: "chat-form",
   chat_form_title: "Contact Us",
@@ -26,4 +26,5 @@ export class BotEngine {
     console.log("Form submitted:", answers);
   }
 })
-    }       
+    }  
+}
