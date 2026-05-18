@@ -1,4 +1,4 @@
-import { Storage } from "./plugins/FormBot/formbot.js";
+import { Storage } from "././plugins/FormBot/formbot.js";
 
 export class BotEngine {
   
