@@ -8,6 +8,7 @@ let currentSchema = null;
 
 const loader = new SchemaLoader();
 const formEngine = new FormEngine();
+const botEngine = new BotEngine();
 const promptEngine = new PromptEngine();
 const storage = new Storage();
 
@@ -30,7 +31,8 @@ window.loadSchema = async function () {
     const file = document.getElementById("promptSelector").value;
     currentSchema = await loader.loadSchema(file);
     formEngine.render(currentSchema);
-
+    botEngine.render(currentSchema);
+    
     document.getElementById("prompt-body").classList.remove("d-none");
 };
 
