@@ -22,8 +22,17 @@ import "../plugins/FormBot/formbot.js";
         questions: questions,
         onComplete: (answers) => {
           console.log("Form submitted:", answers);
+          console.log("Form submitted:", this.collect(answers));
           generateBotPrompt();
         }
       });
     }  
+
+    collect(answers) {
+    return Object.fromEntries(
+        answers
+            .filter(a => a && a.name)
+            .map(a => [a.name, a.file || a.value || ""])
+    );
+  }
 }
