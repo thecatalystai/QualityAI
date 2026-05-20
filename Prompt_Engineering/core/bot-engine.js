@@ -26,6 +26,7 @@ import "../plugins/FormBot/formbot.js";
           
           const dataanswers = this.collect(answers);
           console.log("Form submitted:", dataanswers);
+          this.showMessage("Thanks for your responses...");
           
           generateBotPrompt(dataanswers);
         }
