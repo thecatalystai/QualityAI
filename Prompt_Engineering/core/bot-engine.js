@@ -21,13 +21,10 @@ import "../plugins/FormBot/formbot.js";
         chat_form_title: "Contact Us",
         questions: questions,
         onComplete: (answers) => {
-          console.log("Form submitted:", answers);
-          
-          
+          //console.log("Form submitted:", answers);       
           const dataanswers = this.collect(answers);
-          console.log("Form submitted:", dataanswers);
-          FormBot.showMessage("Thanks for your responses...");
-          
+          //console.log("Form submitted:", dataanswers);
+          FormBot.showMessage("Thanks for your input, your prompt has been created and copied. You can now open any generative AI tool and paste it into the prompt field to get your result....");          
           generateBotPrompt(dataanswers);
         }
       });
