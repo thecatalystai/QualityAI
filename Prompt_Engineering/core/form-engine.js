@@ -19,7 +19,7 @@ export class FormEngine {
                 html += `<textarea class="form-control" id="${f.name}" placeholder="${f.label}" rows="6"></textarea>`;
             }
 
-            if (f.type === "dropdown") {
+            if (f.type === "select") {
                 html += `<select class="form-select" id="${f.name}">`;
                 html += `<option value="" selected disabled>${f.label}</option>`;
                 f.options.forEach(o => {
