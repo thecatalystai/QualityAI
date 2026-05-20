@@ -55,21 +55,9 @@
             
             <!-- SELECTOR -->
             <div class="card mb-3 shadow-sm">
-                <div class="card-header">Select Prompt Type
-                      <div class="btn-group btn-toolbar" role="group">
-                        <input type="radio" class="btn-check" name="modeToggle" id="formMode" checked>
-                        <label class="btn btn-outline-primary d-flex align-items-center gap-2" for="formMode">
-                          <i class="bi bi-ui-checks-grid"></i>
-                        </label>
-                    
-                        <input type="radio" class="btn-check" name="modeToggle" id="chatMode">
-                        <label class="btn btn-outline-primary d-flex align-items-center gap-2" for="chatMode">
-                          <i class="bi bi-chat-dots"></i>
-                        </label>
-                      </div>                
-                </div>
+                <div class="card-header">Select Prompt Type</div>
                 <div class="card-body row g-3 align-items-end">
-                    <div class="col-md-3">
+                    <div class="col-md-12">
                       <div class="btn-group" role="group">
                         <input type="radio" class="btn-check" name="modeToggle" id="formMode" checked>
                         <label class="btn btn-outline-primary d-flex align-items-center gap-2" for="formMode">
@@ -80,9 +68,7 @@
                         <label class="btn btn-outline-primary d-flex align-items-center gap-2" for="chatMode">
                           <i class="bi bi-chat-dots"></i>
                         </label>
-                      </div>
-                    </div>
-                    <div class="col-md-9">
+                      </div>                        
                         <select id="promptSelector" class="form-select" onchange="loadSchema()">
                             <option value="" selected disabled>Select prompt type...</option>
                         </select>
