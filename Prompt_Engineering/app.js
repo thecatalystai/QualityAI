@@ -85,3 +85,41 @@ function renderHistory() {
             </div>
         `).join("");
 }
+
+/* Mode Toggle */
+function initModeToggle() {
+  const formMode = document.getElementById("formMode");
+  const chatMode = document.getElementById("chatMode");
+
+  const formView = document.getElementById("formView");
+  const chatView = document.getElementById("chatView");
+
+  if (!formMode || !chatMode || !formView || !chatView) {
+    console.error("Toggle elements not found");
+    return;
+  }
+
+  function showForm() {
+    formView.classList.remove("d-none");
+    chatView.classList.add("d-none");
+  }
+
+  function showChat() {
+    chatView.classList.remove("d-none");
+    formView.classList.add("d-none");
+  }
+
+  formMode.addEventListener("change", function () {
+    if (this.checked) showForm();
+  });
+
+  chatMode.addEventListener("change", function () {
+    if (this.checked) showChat();
+  });
+
+  // default state
+  showForm();
+}
+
+// initialize after DOM ready
+document.addEventListener("DOMContentLoaded", initModeToggle);
