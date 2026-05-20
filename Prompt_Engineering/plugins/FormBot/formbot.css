@@ -14,8 +14,8 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background: var(--chat_color1);
-    color: #fff;
+    background-color: var(--bs-card-cap-color);
+    color: var(--bs-card-cap-color);
     padding: 8px 3px;
 }
 
