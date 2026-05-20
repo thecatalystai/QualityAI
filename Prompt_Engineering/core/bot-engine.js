@@ -22,6 +22,7 @@ import "../plugins/FormBot/formbot.js";
         questions: questions,
         onComplete: (answers) => {
           console.log("Form submitted:", answers);
+          generatePrompt();
         }
       });
     }  
