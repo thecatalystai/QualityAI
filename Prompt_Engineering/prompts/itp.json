@@ -7,13 +7,13 @@
             "name": "work_title",
             "label": "Title of ITP",
             "type": "text",
-            "attrs": { required: true }
+            "attrs": { "required": true }
         },
         {
             "name": "discipline",
             "label": "Discipline",
             "type": "select",
-            "attrs": { required: true },
+            "attrs": { "required": true }
             "options": ["Civil Engineering", "Mechanical Engineering", "Electrical Engineering"]
         },
         {
