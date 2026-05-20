@@ -14,9 +14,9 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: var(--bs-card-cap-color);
+    /*background-color: var(--bs-card-cap-color);
     color: var(--bs-card-cap-color);
-    padding: 8px 3px;
+    padding: 8px 3px;*/
 }
 
 .chat-header h6 {
