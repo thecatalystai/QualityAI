@@ -9,7 +9,7 @@ const FormBot = {
   answers: [],
   initHTML: `
     <div id="chat-container" class="chat-box light-theme">
-    <div class="chat-header">
+    <div class="card-header">
         <h6 id="chat_formTitle">Chat Assistant</h6>
         <div class="chat-actions">
             <button id="restart-btn">Restart</button>
@@ -22,7 +22,7 @@ const FormBot = {
     <form id="chatInputSubmitForm" novalidate>
         <div id="chat-input-area">
             <div id="chat-input-wrapper"></div>
-            <button id="send-btn" type="submit">Send</button>
+            <button id="send-btn" class="btn btn-success w-100 mb-3" type="submit">Send</button>
         </div>
     </form>
 </div>
