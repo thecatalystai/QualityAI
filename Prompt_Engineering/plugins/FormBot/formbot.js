@@ -9,7 +9,7 @@ const FormBot = {
   answers: [],
   initHTML: `
     <div id="chat-container" class="chat-box light-theme">
-    <div class="chat-header">
+    <div class="chat-header card-header">
         <h6 id="chat_formTitle">Chat Assistant</h6>
         <div class="chat-actions">
             <button id="restart-btn">Restart</button>
