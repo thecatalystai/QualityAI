@@ -13,30 +13,34 @@
             "name": "discipline",
             "label": "Discipline",
             "type": "select",
-            "attrs": { "required": true }
+            "attrs": { "required": true },
             "options": ["Civil Engineering", "Mechanical Engineering", "Electrical Engineering"]
         },
         {
             "name": "activity",
             "label": "Construction Activity",
-            "type": "text"
+            "type": "text",
+            "attrs": { "required": true }
         },        
         {
             "name": "inspection_stage",
-            "label": "Stages",
+            "label": "Inspection Stages",
             "type": "multiselect",
+            "attrs": { "required": true },
             "options": ["Document Review", "Factory Inspection", "Material Receiving", "Survey", "Preparation", "Construction", "Installation", "Testing", "Commissioning"]
         },
         {
             "name": "stakeholders",
             "label": "Stakeholder",
             "type": "multiselect",
+            "attrs": { "required": true },
             "options": ["Client", "Contractor", "Consultant", "QA/QC - Quality Control", "Third Party Testing Service", "HSE - Health & Safety", "Vendor", "PMO", "Operator", "Developer", "Owner", "Sub Contractor"]
         }, 
         {
             "name": "roles",
             "label": "Roles & Responsibilities",
             "type": "multiselect",
+            "attrs": { "required": true },
             "options": ["H - Hold Point", "I - Inspection", "R - Review", "S - Surveillance", "W - Witness"]
         }, 
         {
@@ -46,7 +50,7 @@
         },        
         {
             "name": "remarks",
-            "label": "Remarks",
+            "label": "Any Additional Considerations",
             "type": "textarea"
         }
     ],
