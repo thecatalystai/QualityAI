@@ -76,28 +76,27 @@
         </div>
         
         <!-- LEFT SIDE: PROMPT ENGINE -->
+        <div id="prompt-body" class="d-none">
         <div class="col-lg-6">           
-            <div id="prompt-body" class="d-none">
-
-                <!-- BOT -->
-                <div id="chatView" class="card mb-3 shadow-sm h-500">
-                    <div id="chat-form"></div>
+            <!-- BOT -->
+            <div id="chatView" class="card mb-3 shadow-sm h-500">
+                <div id="chat-form"></div>
+            </div>
+            
+            <!-- FORM -->
+            <div id="formView" class="card mb-3 shadow-sm h-500">
+                <div class="card-header">Tailor your Prompt</div>
+                <div class="card-body overflow-auto" id="formArea" style="max-height: 40vh;">
+                    <p class="text-muted">Select a prompt type to begin</p>
                 </div>
                 
-                <!-- FORM -->
-                <div id="formView" class="card mb-3 shadow-sm h-500">
-                    <div class="card-header">Tailor your Prompt</div>
-                    <div class="card-body overflow-auto" id="formArea" style="max-height: 40vh;">
-                        <p class="text-muted">Select a prompt type to begin</p>
-                    </div>
-                    
-                    <!-- ACTION -->
-                    <button class="btn btn-primary w-100 mb-3" onclick="generatePrompt()">
-                        Generate Prompt
-                    </button>  
-                </div>
+                <!-- ACTION -->
+                <button class="btn btn-primary w-100 mb-3" onclick="generatePrompt()">
+                    Generate Prompt
+                </button>  
+            </div>
 
-                <div class="card mb-3 shadow-sm h-500" id="chat-form"></div>
+            <div class="card mb-3 shadow-sm h-500" id="chat-form"></div>
         </div>
 
         <!-- RIGHT SIDE: HISTORY -->
