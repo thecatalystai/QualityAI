@@ -12,7 +12,7 @@
         {
             "name": "discipline",
             "label": "Discipline",
-            "type": "dropdown",
+            "type": "select",
             "attrs": { required: true },
             "options": ["Civil Engineering", "Mechanical Engineering", "Electrical Engineering"]
         },
