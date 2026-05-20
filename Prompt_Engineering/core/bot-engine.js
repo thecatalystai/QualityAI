@@ -28,8 +28,6 @@ import "../plugins/FormBot/formbot.js";
           generateBotPrompt(dataanswers);
         }
       });
-
-        FormBot.showMessage("Answer a few, questions to tailor your prompt....."); 
     }  
 
     collect(answers) {
