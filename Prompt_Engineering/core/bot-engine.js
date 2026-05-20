@@ -18,7 +18,7 @@ import "../plugins/FormBot/formbot.js";
         
         FormBot.init({
         chat_containerId: "chat-form",
-        chat_form_title: "Contact Us",
+        chat_form_title: "Tailor Your Prompt",
         questions: questions,
         onComplete: (answers) => {
           //console.log("Form submitted:", answers);       
