@@ -5,13 +5,15 @@
     "fields": [
         {
             "name": "work_title",
-            "label": "Work Title",
-            "type": "text"
+            "label": "Title of ITP",
+            "type": "text",
+            "attrs": { required: true }
         },
         {
             "name": "discipline",
             "label": "Discipline",
             "type": "dropdown",
+            "attrs": { required: true },
             "options": ["Civil Engineering", "Mechanical Engineering", "Electrical Engineering"]
         },
         {
