@@ -57,10 +57,8 @@ window.generatePrompt = function () {
 };
 
 /* GENERATE BOT PROMPT */
-window.generatePrompt = function () {
-    const data = BotEngine.collect(currentSchema);
-    const prompt = promptEngine.build(currentSchema.template, data);
-    
+window.generateBotPrompt = function (data) {
+    const prompt = promptEngine.build(currentSchema.template, data);    
     document.getElementById("output").innerText = prompt;
     
     storage.save(prompt);
