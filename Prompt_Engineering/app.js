@@ -106,6 +106,8 @@ function initModeToggle() {
     return;
   }
 
+    loadSchema();
+    
   function showForm() {
     formView.classList.remove("d-none");
     chatView.classList.add("d-none");
