@@ -30,8 +30,14 @@ window.onload = async function () {
 window.loadSchema = async function () {
     const file = document.getElementById("promptSelector").value;
     currentSchema = await loader.loadSchema(file);
-    formEngine.render(currentSchema);
-    botEngine.render(currentSchema);
+
+    const isChatMode = document.getElementById("chatMode").checked;
+
+    if (isChatMode) {
+        botEngine.render(currentSchema);
+    } else {
+        formEngine.render(currentSchema);
+    }
     
     document.getElementById("prompt-body").classList.remove("d-none");
 };
