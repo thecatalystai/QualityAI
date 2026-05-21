@@ -41,6 +41,7 @@ window.loadSchema = async function () {
     }
     
     document.getElementById("prompt-body").classList.remove("d-none");
+    document.getElementById("alertContainer").innerHTML = '';
 };
 
 /* GENERATE PROMPT */
