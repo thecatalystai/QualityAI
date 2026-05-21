@@ -109,24 +109,28 @@ function initModeToggle() {
   function showForm() {
     formView.classList.remove("d-none");
     chatView.classList.add("d-none");
+      loadSchema();
   }
 
   function showChat() {
     chatView.classList.remove("d-none");
     formView.classList.add("d-none");
+      loadSchema();
   }
 
   formMode.addEventListener("change", function () {
     if (this.checked) showForm();
+      loadSchema();
   });
 
   chatMode.addEventListener("change", function () {
     if (this.checked) showChat();
+      loadSchema();
   });
 
   // default state
-  //showForm();
-  loadSchema();
+  showForm();
+  
 }
 
 // initialize after DOM ready
