@@ -112,22 +112,26 @@ function initModeToggle() {
     formView.classList.remove("d-none");
     chatView.classList.add("d-none");
       loadSchema();
+      renderHistory();
   }
 
   function showChat() {
     chatView.classList.remove("d-none");
     formView.classList.add("d-none");
       loadSchema();
+      renderHistory();
   }
 
   formMode.addEventListener("change", function () {
     if (this.checked) showForm();
       loadSchema();
+      renderHistory();
   });
 
   chatMode.addEventListener("change", function () {
     if (this.checked) showChat();
       loadSchema();
+      renderHistory();
   });
 
   // default state
