@@ -125,7 +125,7 @@ function initModeToggle() {
   });
 
   // default state
-  showForm();
+  //showForm();
   loadSchema();
 }
 
