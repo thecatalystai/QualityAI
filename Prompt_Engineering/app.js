@@ -32,10 +32,11 @@ window.loadSchema = async function () {
     currentSchema = await loader.loadSchema(file);
 
     const isChatMode = document.getElementById("chatMode").checked;
+    const isFormMode = document.getElementById("formMode").checked;
 
     if (isChatMode) {
         botEngine.render(currentSchema);
-    } else {
+    } elseif (isFormMode) {
         formEngine.render(currentSchema);
     }
     
