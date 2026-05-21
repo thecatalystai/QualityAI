@@ -105,8 +105,6 @@ function initModeToggle() {
     console.error("Toggle elements not found");
     return;
   }
-
-    loadSchema();
     
   function showForm() {
     formView.classList.remove("d-none");
@@ -128,6 +126,7 @@ function initModeToggle() {
 
   // default state
   showForm();
+  loadSchema();
 }
 
 // initialize after DOM ready
