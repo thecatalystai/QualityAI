@@ -36,7 +36,7 @@ window.loadSchema = async function () {
 
     if (isChatMode) {
         botEngine.render(currentSchema);
-    } elseif (isFormMode) {
+    } else if (isFormMode) {
         formEngine.render(currentSchema);
     }
     
