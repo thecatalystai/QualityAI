@@ -41,7 +41,8 @@ window.loadSchema = async function () {
     }
     
     document.getElementById("prompt-body").classList.remove("d-none");
-    document.getElementById("alertContainer").innerHTML = '';
+    document.getElementById("alertContainer").innerHTML = '<div class="alert alert-danger alert-dismissible fade show" role="alert">Please complete input to generate prompt.</div>';
+    document.getElementById("output").innerHTML = '';
 };
 
 /* GENERATE PROMPT */
