@@ -1,11 +1,11 @@
-import "../plugins/FormBot/formbot.js";
-
-  const questions = [];
+import "../plugins/FormBot/formbot.js";  
 
   export class BotEngine {
     
       render(schema) {
 
+        const questions = [];
+        
         schema.fields.forEach(f => {
         questions.push({
           label: f.label,
