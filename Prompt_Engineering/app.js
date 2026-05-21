@@ -4,229 +4,130 @@ import { BotEngine } from "./core/bot-engine.js";
 import { PromptEngine } from "./core/prompt-engine.js";
 import { Storage } from "./core/storage.js";
 
-/* =========================
-   STATE
-========================= */
 let currentSchema = null;
 
-/* =========================
-   INSTANCES
-========================= */
 const loader = new SchemaLoader();
 const formEngine = new FormEngine();
 const botEngine = new BotEngine();
 const promptEngine = new PromptEngine();
 const storage = new Storage();
 
-/* =========================
-   INIT APP
-========================= */
-document.addEventListener("DOMContentLoaded", async () => {
-    await initRegistry();
-    initModeToggle();
-    renderHistory();
-});
+/* INIT */
+window.onload = async function () {
+    const registry = await loader.loadRegistry();
 
-/* =========================
-   REGISTRY LOADING
-========================= */
-async function initRegistry() {
-    try {
-        const registry = await loader.loadRegistry();
-        const selector = document.getElementById("promptSelector");
-
-        if (!selector) {
-            console.error("promptSelector not found");
-            return;
-        }
-
-        selector.innerHTML = '<option value="">-- Select Prompt --</option>';
-
-        registry.forEach(item => {
-            const opt = document.createElement("option");
-            opt.value = item.file;
-            opt.textContent = item.name;
-            selector.appendChild(opt);
-        });
-
-    } catch (err) {
-        console.error("Failed to load registry:", err);
-    }
-}
-
-/* =========================
-   LOAD SCHEMA
-========================= */
-async function loadSchema() {
     const selector = document.getElementById("promptSelector");
-    if (!selector || !selector.value) {
-        console.warn("No schema selected");
-        return;
+
+    registry.forEach(item => {
+        const opt = document.createElement("option");
+        opt.value = item.file;
+        opt.textContent = item.name;
+        selector.appendChild(opt);
+    });
+};
+
+/* LOAD SCHEMA */
+window.loadSchema = async function () {
+    const file = document.getElementById("promptSelector").value;
+    currentSchema = await loader.loadSchema(file);
+
+    const isChatMode = document.getElementById("chatMode").checked;
+    const isFormMode = document.getElementById("formMode").checked;
+
+    if (isChatMode) {
+        botEngine.render(currentSchema);
+    } else if (isFormMode) {
+        formEngine.render(currentSchema);
     }
+    
+    document.getElementById("prompt-body").classList.remove("d-none");
+};
 
-    try {
-        currentSchema = await loader.loadSchema(selector.value);
-
-        const isChatMode = document.getElementById("chatMode")?.checked;
-        const isFormMode = document.getElementById("formMode")?.checked;
-
-        if (isChatMode) {
-            botEngine.render(currentSchema);
-        } else if (isFormMode) {
-            formEngine.render(currentSchema);
-        }
-
-        document.getElementById("prompt-body")?.classList.remove("d-none");
-
-    } catch (err) {
-        console.error("Failed to load schema:", err);
-    }
-}
-
-/* =========================
-   PROMPT HANDLER (DRY)
-========================= */
-function handlePrompt(prompt) {
-    const output = document.getElementById("output");
-    if (output) {
-        output.innerText = prompt;
-    }
-
-    storage.save(prompt);
-    renderHistory();
-    copyToClipboard(prompt);
-}
-
-/* =========================
-   GENERATE PROMPTS
-========================= */
-function generatePrompt() {
-    if (!currentSchema) {
-        console.error("Schema not loaded");
-        return;
-    }
-
+/* GENERATE PROMPT */
+window.generatePrompt = function () {
     const data = formEngine.collect(currentSchema);
     const prompt = promptEngine.build(currentSchema.template, data);
 
-    handlePrompt(prompt);
-}
+    document.getElementById("output").innerText = prompt;
 
-function generateBotPrompt(data) {
-    if (!currentSchema) {
-        console.error("Schema not loaded");
-        return;
-    }
+    storage.save(prompt);
+    renderHistory();
 
-    const prompt = promptEngine.build(currentSchema.template, data);
-    handlePrompt(prompt);
-}
+    // Copy to clipboard
+    navigator.clipboard.writeText(prompt).then(() => {
+        //alert("✅ Prompt copied successfully! You can now paste it into any generative AI tool to generate content.");
+        document.getElementById("alertContainer").innerHTML = '<div class="alert alert-primary alert-dismissible fade show" role="alert">✅ Prompt copied successfully! You can now paste it into any generative AI tool to generate content.</div>';
+    }).catch(() => {
+        //alert("⚠️ Failed to copy prompt. Please manually copy it from the output area.");
+        document.getElementById("alertContainer").innerHTML = '<div class="alert alert-danger alert-dismissible fade show" role="alert">⚠️ Failed to copy prompt. Please manually copy it from the output area.</div>';
+    });
+};
 
-/* =========================
-   CLIPBOARD
-========================= */
-function copyToClipboard(text) {
-    if (!navigator.clipboard) {
-        showAlert("Clipboard not supported", "danger");
-        return;
-    }
+/* GENERATE BOT PROMPT */
+window.generateBotPrompt = function (data) {
+    const prompt = promptEngine.build(currentSchema.template, data);    
+    document.getElementById("output").innerText = prompt;
+    
+    storage.save(prompt);
+    renderHistory();
+    
+    // Copy to clipboard
+    navigator.clipboard.writeText(prompt).then(() => {
+        //alert("✅ Prompt copied successfully! You can now paste it into any generative AI tool to generate content.");
+        document.getElementById("alertContainer").innerHTML = '<div class="alert alert-primary alert-dismissible fade show" role="alert">✅ Prompt copied successfully! You can now paste it into any generative AI tool to generate content.</div>';
+    }).catch(() => {
+        //alert("⚠️ Failed to copy prompt. Please manually copy it from the output area.");
+        document.getElementById("alertContainer").innerHTML = '<div class="alert alert-danger alert-dismissible fade show" role="alert">⚠️ Failed to copy prompt. Please manually copy it from the output area.</div>';
+    });
+};
 
-    navigator.clipboard.writeText(text)
-        .then(() => showAlert("✅ Prompt copied successfully!", "primary"))
-        .catch(() => showAlert("⚠️ Failed to copy prompt", "danger"));
-}
-
-/* =========================
-   ALERT SYSTEM
-========================= */
-function showAlert(message, type = "primary") {
-    const container = document.getElementById("alertContainer");
-    if (!container) return;
-
-    const div = document.createElement("div");
-    div.className = `alert alert-${type} alert-dismissible fade show`;
-    div.setAttribute("role", "alert");
-    div.textContent = message;
-
-    container.innerHTML = "";
-    container.appendChild(div);
-}
-
-/* =========================
-   HISTORY (SAFE RENDER)
-========================= */
+/* HISTORY */
 function renderHistory() {
     const history = storage.getAll();
-    const container = document.getElementById("history");
 
-    if (!container) return;
-
-    container.innerHTML = history.map(h => `
-        <div class="border rounded p-2 mb-2 bg-light">
-            <pre class="mb-0">${escapeHTML(h)}</pre>
-        </div>
-    `).join("");
+    document.getElementById("history").innerHTML =
+        history.map(h => `
+            <div class="border rounded p-2 mb-2 bg-light">
+                <pre class="mb-0">${h}</pre>
+            </div>
+        `).join("");
 }
 
-/* =========================
-   SECURITY: ESCAPE HTML
-========================= */
-function escapeHTML(str) {
-    return str.replace(/[&<>"']/g, m => ({
-        "&": "&amp;",
-        "<": "&lt;",
-        ">": "&gt;",
-        '"': "&quot;",
-        "'": "&#39;"
-    }[m]));
-}
-
-/* =========================
-   MODE TOGGLE
-========================= */
+/* Mode Toggle */
 function initModeToggle() {
-    const formMode = document.getElementById("formMode");
-    const chatMode = document.getElementById("chatMode");
+  const formMode = document.getElementById("formMode");
+  const chatMode = document.getElementById("chatMode");
 
-    const formView = document.getElementById("formView");
-    const chatView = document.getElementById("chatView");
+  const formView = document.getElementById("formView");
+  const chatView = document.getElementById("chatView");
 
-    if (!formMode || !chatMode || !formView || !chatView) {
-        console.error("Toggle elements missing");
-        return;
-    }
+  if (!formMode || !chatMode || !formView || !chatView) {
+    console.error("Toggle elements not found");
+    return;
+  }
+    
+  function showForm() {
+    formView.classList.remove("d-none");
+    chatView.classList.add("d-none");
+  }
 
-    function showForm() {
-        formView.classList.remove("d-none");
-        chatView.classList.add("d-none");
-    }
+  function showChat() {
+    chatView.classList.remove("d-none");
+    formView.classList.add("d-none");
+  }
 
-    function showChat() {
-        chatView.classList.remove("d-none");
-        formView.classList.add("d-none");
-    }
+  formMode.addEventListener("change", function () {
+    if (this.checked) showForm();
+  });
 
-    formMode.addEventListener("change", () => {
-        if (formMode.checked) showForm();
-    });
+  chatMode.addEventListener("change", function () {
+    if (this.checked) showChat();
+  });
 
-    chatMode.addEventListener("change", () => {
-        if (chatMode.checked) showChat();
-    });
-
-    // Default mode
-    if (formMode.checked) {
-        showForm();
-    } else {
-        showChat();
-    }
+  // default state
+  //showForm();
+  loadSchema();
 }
 
-/* =========================
-   GLOBAL API (SAFE)
-========================= */
-window.app = {
-    loadSchema,
-    generatePrompt,
-    generateBotPrompt
-};
+// initialize after DOM ready
+document.addEventListener("DOMContentLoaded", initModeToggle);
